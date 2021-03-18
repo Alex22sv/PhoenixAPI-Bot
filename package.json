@@ -1,0 +1,24 @@
+{
+  "name": "phoenixapi-bot",
+  "version": "1.0.0",
+  "description": "Discord Bot developed with Discord.js and the exaroton API. The main objective of this bot is for moderation of exaroton servers.",
+  "main": "BotExample.js",
+  "dependencies": {
+    "discord.js": "^12.5.1",
+    "exaroton": "^1.5.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alex0622/PhoenixAPI-Bot.git"
+  },
+  "author": "Alex0622",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Alex0622/PhoenixAPI-Bot/issues"
+  },
+  "homepage": "https://github.com/Alex0622/PhoenixAPI-Bot#readme"
+}
