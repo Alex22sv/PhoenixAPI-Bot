@@ -1,15 +1,16 @@
 const Discord = require('discord.js');
+const config = require('./config.json')
 const {Client} = require('exaroton');
 const bot = new Discord.Client();
-const exarotonClient = new Client('Insert your exaroton Token here');
-const prefix = 'API '
-let server = exarotonClient.server('Insert your exaroton server ID here');
+const exarotonClient = new Client(config.exarotonAPIkey);
+const prefix = config.prefix
+let server = exarotonClient.server(config.exarotonServerID);
 
 
 bot.on('ready', () => {
     console.log('Bot online')
     bot.user.setActivity('exaroton servers', {type: 'WATCHING'})
-    let generalChannel = bot.channels.cache.get('Insert your Discord channel ID here')
+    let generalChannel = bot.channels.cache.get(config.generalChannelID)
     generalChannel.send(" Hey, I'm back!")
     console.log('Guilds: '+ bot.guilds.cache.size)
 })
@@ -20,7 +21,7 @@ bot.on('message', (msg)=>{
         const args = msg.content.split(" ");
         if(args[2] == undefined) {
             const helpEmbed = new Discord.MessageEmbed()
-                .setTitle('API bot | Prefix: `' + prefix + '`')
+                .setTitle('PhoenixAPI | Prefix: `' + prefix + '`')
                 .setColor('#19ba19')
                 .setDescription('`account`, `ban`, `execute`, `log`, `op`, `ram`, `restart`, `server`, `start`, `stop`, `support`, `whitelist`')
                 .setFooter(msg.author.username+'#'+msg.author.discriminator) 
@@ -559,4 +560,4 @@ bot.on('message', (msg)=>{
     }
 })
 
-bot.login('Insert your Discord Token here')
+bot.login(config.DiscordAPItoken)
