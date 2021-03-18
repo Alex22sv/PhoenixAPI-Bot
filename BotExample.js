@@ -388,7 +388,7 @@ bot.on('message', (msg)=>{
                     msg.channel.send("This server has " + ram + " GB RAM.");
                     console.log('API ram check | User: ' + msg.author.username+'#'+msg.author.discriminator)
                 } catch (e) {
-                    console.error('Error while checking server RAM:' + e.message);
+                    console.error('Error while checking server RAM: ' + e.message);
                     msg.channel.send('An error occured while getting RAM: `' + e.message + '`.')   
                 }
             }   
