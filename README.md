@@ -1,5 +1,5 @@
 # PhoenixAPI-Bot
-PhoeniAPI is a bot developed with discord.js. The main reason of this bot is the moderation for [exaroton](https://exaroton.com/) servers using the exaroton API.
+PhoenixAPI is a bot developed with discord.js. The main reason of this bot is the moderation for [exaroton](https://exaroton.com/) servers using the exaroton API.
 You can find the documentation about the exaroton API [here](https://support.exaroton.com/hc/en-us/articles/360011926177-API-documentation) and its package [here](https://www.npmjs.com/package/exaroton).
 
 # Using the bot
