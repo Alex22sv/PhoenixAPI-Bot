@@ -137,7 +137,7 @@ bot.on('message', (msg)=>{
                 .setColor('#19ba19')
                 .addFields(
                     {name:'Description', value:'Give the current server status.'},
-                    {name:'Usage', value: '`' + prefix + 'server`'}
+                    {name:'Usage', value: '`' + prefix + 'server {server name}`'}
                 )
                 .setTimestamp()
                 .setFooter(msg.author.username+'#'+msg.author.discriminator)
@@ -431,40 +431,56 @@ bot.on('message', (msg)=>{
         if(!msg.member.hasPermission('ADMINISTRATOR')) return msg.channel.send('You need the permission `Administrator` to restart the server!')
     }
 
-    if(msg.content.startsWith(prefix + 'server')){
-        async function APIserver() {
-            await server.get();
-            if (server.hasStatus(server.STATUS.ONLINE)) {
-                currentStatus = 'online'
-            } else if (server.hasStatus(server.STATUS.PREPARING)) {
-                currentStatus = 'preparing'
-            } else if (server.hasStatus(server.STATUS.STARTING)) {
-                currentStatus = 'starting'
-            } else if (server.hasStatus(server.STATUS.LOADING)) {
-                currentStatus = 'loading'
-            } else if (server.hasStatus(server.STATUS.RESTARTING)) {
-                currentStatus = 'restarting'
-            } else if (server.hasStatus(server.STATUS.PENDING)) {
-                currentStatus = 'pending'
-            } else if (server.hasStatus(server.STATUS.CRASHED)) {
-                currentStatus = 'crashed'
-            } else if (server.hasStatus(server.STATUS.STOPPING)){
-                currentStatus = 'stopping'
-            } else if (server.hasStatus(server.STATUS.SAVING)) {
-                currentStatus = 'saving'
-            } else if(server.hasStatus(server.STATUS.OFFLINE)) {
-                currentStatus = 'offline'
+    if(msg.content.startsWith(prefix + "server")){
+        const args = msg.content.split(" ");
+        if(args[2] !==undefined){
+            async function test(){
+                let name = args[2];
+                let serverLists = await exarotonClient.getServers();
+                let serverStatus = serverLists.find(serverStatus => serverStatus.name === name);
+                try {
+                    await serverStatus.get(); 
+                    if (serverStatus.hasStatus(serverStatus.STATUS.ONLINE)) {
+                        currentStatus = 'online'
+                    } else if (serverStatus.hasStatus(serverStatus.STATUS.PREPARING)) {
+                        currentStatus = 'preparing'
+                    } else if (serverStatus.hasStatus(serverStatus.STATUS.STARTING)) {
+                        currentStatus = 'starting'
+                    } else if (serverStatus.hasStatus(serverStatus.STATUS.LOADING)) {
+                        currentStatus = 'loading'
+                    } else if (serverStatus.hasStatus(serverStatus.STATUS.RESTARTING)) {
+                        currentStatus = 'restarting'
+                    } else if (serverStatus.hasStatus(serverStatus.STATUS.PENDING)) {
+                        currentStatus = 'pending'
+                    } else if (serverStatus.hasStatus(serverStatus.STATUS.CRASHED)) {
+                        currentStatus = 'crashed'
+                    } else if (serverStatus.hasStatus(serverStatus.STATUS.STOPPING)){
+                        currentStatus = 'stopping'
+                    } else if (serverStatus.hasStatus(serverStatus.STATUS.SAVING)) {
+                        currentStatus = 'saving'
+                    } else if(serverStatus.hasStatus(serverStatus.STATUS.OFFLINE)) {
+                        currentStatus = 'offline'
+                    }
+                    const StatusEmbed = new Discord.MessageEmbed()
+                        .setAuthor(serverStatus.address)
+                        .setColor('#19ba19')
+                        .setDescription('Current status: **' + currentStatus + '.** \n**' + serverStatus.players.count + '/' + serverStatus.players.max + '** players playing in **'+ serverStatus.software.name + ' ' + serverStatus.software.version + '.**')
+                        .setTimestamp()
+                        .setFooter('#'+serverStatus.id)
+                    msg.channel.send(StatusEmbed)
+                    console.log('API server '+args[2]+ ' | User: ' +msg.author.username+"#"+msg.author.discriminator)
+                }
+                 catch (error) {
+                    console.log('Error while getting server status: ' + error.message)
+                    if(error.message === "Cannot read property 'get' of undefined"){
+                        msg.channel.send('I could not find that server!')
+                    } 
+                }
+                
             }
-            const ServerEmbed = new Discord.MessageEmbed()
-                .setAuthor(server.address)
-                .setColor('#19ba19')
-                .setDescription('Current Status: **' + currentStatus + '.** \n**' + server.players.count + '/' + server.players.max + '** players playing in **'+ server.software.name + ' ' + server.software.version + '.**')
-                .setTimestamp()
-                .setFooter('#'+server.id)
-            msg.channel.send(ServerEmbed)
-            console.log('API server | User: ' + msg.author.username+'#'+msg.author.discriminator)
+            test();
         }
-        APIserver();
+        if(args[2] ===undefined) return msg.channel.send('Please specify a server in your message!')
     }
     
     if(msg.content.startsWith(prefix + 'start')){
