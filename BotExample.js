@@ -22,8 +22,8 @@ bot.on('message', (msg)=>{
         if(args[2] == undefined) {
             const helpEmbed = new Discord.MessageEmbed()
                 .setTitle('PhoenixAPI | Prefix: `' + prefix + '`')
-                .setColor('#19ba19')
-                .setDescription('`account`, `ban`, `execute`, `log`, `op`, `ram`, `restart`, `server`, `start`, `stop`, `support`, `whitelist`')
+                .setColor(config.embedColor)
+                .setDescription('`account`, `ban`, `execute`, `log`, `op`, `ram`, `restart`, `servers`, `status`, `start`, `stop`, `support`, `whitelist`')
                 .setFooter(msg.author.username+'#'+msg.author.discriminator) 
             console.log('API help | User: ' + msg.author.username+'#'+msg.author.discriminator)
             msg.channel.send(helpEmbed)
@@ -32,7 +32,7 @@ bot.on('message', (msg)=>{
         if(args[2] == 'account'){
             const accountHelpEmbed = new Discord.MessageEmbed()
                 .setTitle('Help for command `account`')
-                .setColor('#19ba19')
+                .setColor(config.embedColor)
                 .addFields(
                     {name:'Description', value:'Get information about the exaroton account.'},
                     {name:'Usage', value: '`' + prefix + 'account`'}
@@ -46,7 +46,7 @@ bot.on('message', (msg)=>{
         if(args[2] == 'ban'){
             const banHelpEmbed = new Discord.MessageEmbed()
                 .setTitle('Help for command `ban`')
-                .setColor('#19ba19')
+                .setColor(config.embedColor)
                 .addFields(
                     {name: 'Description', value: 'Add users to the list of banned players.'},
                     {name: 'Usage', value: '`' + prefix + 'ban {add/remove} {Minecraft username}`'},
@@ -61,7 +61,7 @@ bot.on('message', (msg)=>{
         if(args[2] == 'execute'){
             const executeHelpEmbed = new Discord.MessageEmbed()
                 .setTitle('Help for command `execute`')
-                .setColor('#19ba19')
+                .setColor(config.embedColor)
                 .addFields(
                     {name: 'Description', value: 'Execute commands.'},
                     {name: 'Usage', value: '`' + prefix + 'execute`'},
@@ -76,7 +76,7 @@ bot.on('message', (msg)=>{
         if(args[2] == 'log'){
             const logHelpEmbed = new Discord.MessageEmbed()
                 .setTitle('Help for command `log`')
-                .setColor('#19ba19')
+                .setColor(config.embedColor)
                 .addFields(
                     {name:'Description', value:'Get server log using https://mclo.gs/.'},
                     {name:'Usage', value: '`' + prefix + 'log`'}
@@ -87,10 +87,10 @@ bot.on('message', (msg)=>{
             msg.channel.send(logHelpEmbed)
         }
 
-        if(args[2] === 'op'){
+        if(args[2] == 'op'){
             const opHelpEmbed = new Discord.MessageEmbed()
                 .setTitle('Help for command `op`')
-                .setColor('#19ba19')
+                .setColor(config.embedColor)
                 .addFields(
                     {name: 'Description', value: 'Add players to the list of opped players.'},
                     {name: 'Usage', value: '`' + prefix + 'op {add/remove} {Minecraft username}`'},
@@ -105,9 +105,9 @@ bot.on('message', (msg)=>{
         if(args[2] == 'ram'){
             const ramHelpEmbed = new Discord.MessageEmbed()
                 .setTitle('Help for command `ram`')
-                .setColor('#19ba19')
+                .setColor(config.embedColor)
                 .addFields(
-                    {name: 'Description', value: 'Get or set the RAM for server '},
+                    {name: 'Description', value: 'Get or set the RAM for server.'},
                     {name: 'Usage', value: 'Get RAM: `' + prefix + 'ram check` \n Set RAM: `' + prefix + 'ram set {2-16}`'},
                     {name: 'Required permission', value: '`ADMINISTRATOR`'}
                 )
@@ -120,7 +120,7 @@ bot.on('message', (msg)=>{
         if(args[2] == 'restart'){
             const restartHelpEmbed = new Discord.MessageEmbed()
                 .setTitle('Help for command `restart`')
-                .setColor('#19ba19')
+                .setColor(config.embedColor)
                 .addFields(
                     {name:'Description', value:'Restart your server.'},
                     {name:'Usage', value: '`' + prefix + 'restart`'}
@@ -131,24 +131,41 @@ bot.on('message', (msg)=>{
             msg.channel.send(restartHelpEmbed)
         }
 
-        if(args[2] == 'server'){
-            const serverHelpEmbed = new Discord.MessageEmbed()
-                .setTitle('Help for command `server`')
-                .setColor('#19ba19')
+        if(args[2] == 'servers'){
+            async function APIServers(){
+                const serversHelpEmbed = new Discord.MessageEmbed()
+                    .setTitle('Help for command `servers`')
+                    .setColor(config.embedColor)
+                    .addFields(
+                        {name:'Description', value:'Get the list of servers available in the account'},
+                        {name:'Usage', value:'`' + prefix + 'servers`'}
+                    )
+                    .setTimestamp()
+                    .setFooter(msg.author.username+'#'+msg.author.discriminator)
+                console.log('API help servers | User: ' + msg.author.username+'#'+msg.author.discriminator)
+                msg.channel.send(serversHelpEmbed)
+            }
+            APIServers();
+        }
+
+        if(args[2] == 'status'){
+            const statusHelpEmbed = new Discord.MessageEmbed()
+                .setTitle('Help for command `status`')
+                .setColor(config.embedColor)
                 .addFields(
-                    {name:'Description', value:'Give the current server status.'},
-                    {name:'Usage', value: '`' + prefix + 'server {server name}`'}
+                    {name:'Description', value:'Give the current status of the server mentioned.'},
+                    {name:'Usage', value: '`' + prefix + 'status {server name}`'}
                 )
                 .setTimestamp()
                 .setFooter(msg.author.username+'#'+msg.author.discriminator)
-            console.log('API help server | User: ' + msg.author.username+'#'+msg.author.discriminator)
-            msg.channel.send(serverHelpEmbed)
+            console.log('API help status | User: ' + msg.author.username+'#'+msg.author.discriminator)
+            msg.channel.send(statusHelpEmbed)
         }
 
         if(args[2] == 'start'){
             const startHelpEmbed = new Discord.MessageEmbed()
                 .setTitle('Help for command `start`')
-                .setColor('#19ba19')
+                .setColor(config.embedColor)
                 .addFields(
                     {name:'Description', value:'Start the Minecraft server.'},
                     {name:'Usage', value: '`' + prefix + 'start`'}
@@ -162,7 +179,7 @@ bot.on('message', (msg)=>{
         if(args[2] == 'stop'){
             const stopHelpEmbed = new Discord.MessageEmbed()
                 .setTitle('Help for command `stop`')
-                .setColor('#19ba19')
+                .setColor(config.embedColor)
                 .addFields(
                     {name:'Description', value:'Stop the Minecraft server.'},
                     {name:'Usage', value:'`' + prefix + 'stop`'}
@@ -176,7 +193,7 @@ bot.on('message', (msg)=>{
         if(args[2] == 'support'){
             const supportHelpEmbed = new Discord.MessageEmbed()
                 .setTitle('Help for command `support`')
-                .setColor('#19ba19')
+                .setColor(config.embedColor)
                 .addFields(
                     {name:'Description', value:'Give useful links about the exaroton API.'},
                     {name:'Usage', value:'`' + prefix + 'support`'}
@@ -191,7 +208,7 @@ bot.on('message', (msg)=>{
         if(args[2] == 'whitelist'){
             const whitelistHelpEmbed = new Discord.MessageEmbed()
             .setTitle('Help for command `whitelist`')
-            .setColor('#19ba19')
+            .setColor(config.embedColor)
             .addFields(
                 {name: 'Description', value: 'Add players to the whitelist.'},
                 {name: 'Usage', value: '`' + prefix + 'whitelist {add/remove} {Minecraft username}`'}
@@ -214,7 +231,7 @@ bot.on('message', (msg)=>{
             const AccountEmbed = new Discord.MessageEmbed()
                 .setTitle('exaroton account')
                 .setAuthor(account.name)
-                .setColor('#19ba19')
+                .setColor(config.embedColor)
                 .setDescription('This account is ' + embedDescription + ' and has `' + account.credits + '` credits.')
                 .setTimestamp()
                 .setFooter(msg.author.username+'#'+msg.author.discriminator)
@@ -226,10 +243,10 @@ bot.on('message', (msg)=>{
 
     if(msg.content.startsWith(prefix + "ban")){
         const args = msg.content.split(" ");
-        if(args[2] === undefined){
+        if(args[2] == undefined){
             const helpBanEmbed = new Discord.MessageEmbed()
                 .setTitle('Help for command `ban`')
-                .setColor('#19ba19')
+                .setColor(config.embedColor)
                 .addFields(
                     {name: 'Description', value: 'Add players to the list of banned players.'},
                     {name: 'Usage', value: '`' + prefix + 'ban {add/remove} {Minecraft username}`'},
@@ -242,8 +259,8 @@ bot.on('message', (msg)=>{
         }
 
         if(msg.member.hasPermission('ADMINISTRATOR')) {
-            if(args[2] === "add"){
-                if(args[3] === undefined){
+            if(args[2] == "add"){
+                if(args[3] == undefined){
                     msg.channel.send('Please specify a player!')
                 }
                 
@@ -258,8 +275,8 @@ bot.on('message', (msg)=>{
                 }
             }
 
-            if(args[2] === "remove"){
-                if(args[3] === undefined){
+            if(args[2] == "remove"){
+                if(args[3] == undefined){
                     msg.channel.send('Please specify a player!')
                 }
                 
@@ -312,10 +329,10 @@ bot.on('message', (msg)=>{
 
     if(msg.content.startsWith(prefix + 'op')){
         const args = msg.content.split(" ");
-        if(args[2] === undefined){
+        if(args[2] == undefined){
             const helpOPEmbed = new Discord.MessageEmbed()
                 .setTitle('Help for command `op`')
-                .setColor('#19ba19')
+                .setColor(config.embedColor)
                 .addFields(
                     {name: 'Description', value: 'Add players to the list of opped players.'},
                     {name: 'Usage', value: '`' + prefix + 'op {add/remove} {Minecraft username}`'},
@@ -328,8 +345,8 @@ bot.on('message', (msg)=>{
         }
 
         if(msg.member.hasPermission('ADMINISTRATOR')) {
-            if(args[2] === "add"){
-                if(args[3] === undefined){
+            if(args[2] == "add"){
+                if(args[3] == undefined){
                     msg.channel.send('Please specify a player!')
                 }
 
@@ -344,8 +361,8 @@ bot.on('message', (msg)=>{
                 }
             }
 
-            if(args[2] === "remove"){
-                if(args[3] === undefined){
+            if(args[2] == "remove"){
+                if(args[3] == undefined){
                     msg.channel.send('Please specify a player!')
                 }
                 
@@ -366,12 +383,12 @@ bot.on('message', (msg)=>{
 
     if(msg.content.startsWith(prefix + 'ram')) {
         const args = msg.content.split(" ");
-        if(args[2] === undefined){
+        if(args[2] == undefined){
             const helpRAMEmbed = new Discord.MessageEmbed()
                 .setTitle('Help for command `ram`')
-                .setColor('#19ba19')
+                .setColor(config.embedColor)
                 .addFields(
-                    {name: 'Description', value: 'Get or set the RAM for server '},
+                    {name: 'Description', value: 'Get or set the RAM for server.'},
                     {name: 'Usage', value: 'Get RAM: `' + prefix + 'ram check` \n Set RAM: `' + prefix + 'ram set {2-16}`'},
                     {name: 'Required permission', value: '`ADMINISTRATOR`'}
                 )
@@ -381,7 +398,7 @@ bot.on('message', (msg)=>{
             msg.channel.send(helpRAMEmbed)
         }
 
-        if(args[2] === 'check'){
+        if(args[2] == 'check'){
             async function APIRAMGet() {
                 try {
                     let ram = await server.getRAM();
@@ -395,7 +412,7 @@ bot.on('message', (msg)=>{
             APIRAMGet();
         }
 
-        if(args[2] === 'set'){
+        if(args[2] == 'set'){
             async function APIRAMSet() {
                 try {
                     await server.setRAM(args[3]);
@@ -430,11 +447,21 @@ bot.on('message', (msg)=>{
 
         if(!msg.member.hasPermission('ADMINISTRATOR')) return msg.channel.send('You need the permission `Administrator` to restart the server!')
     }
+    if(msg.content.startsWith(prefix + "servers")){
+        async function APIServers(){
+            let servers = await exarotonClient.getServers();
+            for(let server of servers) {
+                msg.channel.send('Sever address: `' + server.address + '`| Server ID: `' + server.id + '`')
+            }
+        console.log('API servers | User: ' + msg.author.username+'#'+msg.author.discriminator)
+        }
+        APIServers();
+    }
 
-    if(msg.content.startsWith(prefix + "server")){
+    if(msg.content.startsWith(prefix + "status")){
         const args = msg.content.split(" ");
-        if(args[2] !==undefined){
-            async function test(){
+        if(args[2] !== undefined){
+            async function APIStatus(){
                 let name = args[2];
                 let serverLists = await exarotonClient.getServers();
                 let serverStatus = serverLists.find(serverStatus => serverStatus.name === name);
@@ -463,7 +490,7 @@ bot.on('message', (msg)=>{
                     }
                     const StatusEmbed = new Discord.MessageEmbed()
                         .setAuthor(serverStatus.address)
-                        .setColor('#19ba19')
+                        .setColor(config.embedColor)
                         .setDescription('Current status: **' + currentStatus + '.** \n**' + serverStatus.players.count + '/' + serverStatus.players.max + '** players playing in **'+ serverStatus.software.name + ' ' + serverStatus.software.version + '.**')
                         .setTimestamp()
                         .setFooter('#'+serverStatus.id)
@@ -472,15 +499,15 @@ bot.on('message', (msg)=>{
                 }
                  catch (error) {
                     console.log('Error while getting server status: ' + error.message)
-                    if(error.message === "Cannot read property 'get' of undefined"){
+                    if(error.message == "Cannot read property 'get' of undefined"){
                         msg.channel.send('I could not find that server!')
                     } 
                 }
                 
             }
-            test();
+            APIStatus();
         }
-        if(args[2] ===undefined) return msg.channel.send('Please specify a server in your message!')
+        if(args[2] == undefined) return msg.channel.send('Please specify a server in your message!')
     }
     
     if(msg.content.startsWith(prefix + 'start')){
@@ -522,16 +549,23 @@ bot.on('message', (msg)=>{
     }
 
     if(msg.content.startsWith(prefix + 'support')){
+        const supportEmbed = new Discord.MessageEmbed()
+            .setTitle('Useful links about PhoenixAPI')
+            .setColor(config.embedColor)
+            .addFields(
+                {name:'GitHub', value:'[click here](https://github.com/Alex0622/PhoenixAPI-Bot)'},
+                {name:'API documentation', value:'[click here](https://support.exaroton.com/hc/en-us/articles/360011926177-API-documentation)'}
+            )
         console.log('API support | User: ' + msg.author.username+'#'+msg.author.discriminator)
-        msg.channel.send('Reference: https://support.exaroton.com/hc/en-us/articles/360011926177-API-documentation')
+        msg.channel.send(supportEmbed)
     }
 
     if(msg.content.startsWith(prefix + "whitelist")){
         const args = msg.content.split(" ");
-        if(args[2] === undefined){
+        if(args[2] == undefined){
             const helpWhitelistEmbed = new Discord.MessageEmbed()
                 .setTitle('Help for command `whitelist`')
-                .setColor('#19ba19')
+                .setColor(config.embedColor)
                 .addFields(
                     {name: 'Description', value: 'Add players to the whitelist.'},
                     {name: 'Usage', value: '`' + prefix + 'whitelist {add/remove} {Minecraft username}`'}
@@ -542,8 +576,8 @@ bot.on('message', (msg)=>{
             msg.channel.send(helpWhitelistEmbed)
         }
 
-        if(args[2] === 'add'){
-            if(args[3] === undefined){
+        if(args[2] == 'add'){
+            if(args[3] == undefined){
                 msg.channel.send('Pleasy specify an user!')
             }
 
@@ -558,8 +592,8 @@ bot.on('message', (msg)=>{
             }
         }
 
-        if(args[2] === 'remove'){
-            if(args[3] === undefined){
+        if(args[2] == 'remove'){
+            if(args[3] == undefined){
                 msg.channel.send('Please specify a player!')
             }
 

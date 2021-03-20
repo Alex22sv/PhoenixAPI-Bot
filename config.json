@@ -3,5 +3,6 @@
     "exarotonAPIkey" : "",
     "exarotonServerID" : "",
     "DiscordAPItoken" : "",
-    "generalChannelID" :""
+    "generalChannelID" : "",
+    "embedColor" : "#19ba19"
 }
