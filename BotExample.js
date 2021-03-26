@@ -72,6 +72,20 @@ bot.on('message', (msg)=>{
             console.log('API help execute | User: ' + msg.author.username+'#'+msg.author.discriminator)
             msg.channel.send(executeHelpEmbed)
         }
+        
+        if(args[2] == 'info'){
+            const infoHelpEmbed = new Discord.MessageEmbed()
+                .setTitle('Help for command `info`')
+                .setColor(config.embedColor)
+                .addFields(
+                    {name:'Description', value:'Get information about PhoenixAPI.'},
+                    {name:'Usage', value:'`' + prefix + 'info`'}
+                )
+                .setTimestamp()
+                .setFooter(msg.author.username+'#'+msg.author.discriminator)
+            console.log('API help info | User: ' + msg.author.username+'#'+msg.author.discriminator)
+            msg.channel.send(infoHelpEmbed)
+        }
 
         if(args[2] == 'log'){
             const logHelpEmbed = new Discord.MessageEmbed()
@@ -317,6 +331,22 @@ bot.on('message', (msg)=>{
         if(!msg.member.hasPermission('ADMINISTRATOR')) return msg.channel.send('You need the permission `Administrator` to execute commands!')
     }
     
+    if(msg.content.startsWith(prefix + 'info')){
+        const infoEmbed = new Discord.MessageEmbed()
+            .setTitle('PhoenixAPI#4772')
+            .setDescription('PhoenixAPI is a bot developed with discord.js. The main reason of this bot is the managment for [exaroton](https://exaroton.com/) servers using the exaroton API.')
+            .setColor(config.embedColor)
+            .addFields(
+                {name:'Owner', value:'`Alex22#7756`', inline:true},
+                {name:'Current version', value:'`1.2`', inline:true},
+                {name:'Prefix', value:'`'+prefix+'`', inline:true},
+                {name:'Links', value:'[GitHub](https://github.com/Alex0622/PhoenixAPI-Bot) | [exaroton API documentation](https://support.exaroton.com/hc/en-us/articles/360011926177-API-documentation)', inline:false}
+            )
+            .setFooter(msg.author.username+'#'+msg.author.discriminator)
+            console.log('API info | User: ' + msg.author.username+'#'+msg.author.discriminator)
+            msg.channel.send(infoEmbed)
+    }
+
     if(msg.content.startsWith(prefix + 'log')){
         async function APILog() {
             const logMsg = await msg.channel.send('Getting log from server...')
