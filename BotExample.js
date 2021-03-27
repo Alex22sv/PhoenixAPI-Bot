@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const config = require('./config.json')
+
 const {Client} = require('exaroton');
 const bot = new Discord.Client();
 const exarotonClient = new Client(config.exarotonAPIkey);
@@ -23,9 +24,9 @@ bot.on('message', (msg)=>{
             const helpEmbed = new Discord.MessageEmbed()
                 .setTitle('PhoenixAPI | Prefix: `' + prefix + '`')
                 .setColor(config.embedColor)
-                .setDescription('`account`, `ban`, `execute`, `info`, `log`, `op`, `ram`, `restart`, `servers`, `status`, `start`, `stop`, `whitelist`')
+                .setDescription('`account`, `ban`, `execute`, `info`, `list`, `log`, `op`, `ram`, `restart`, `servers`, `status`, `start`, `stop`, `whitelist`')
                 .setFooter(msg.author.username+'#'+msg.author.discriminator) 
-            console.log('API help | User: ' + msg.author.username+'#'+msg.author.discriminator)
+            console.log('API help | ' +  'User: ' + msg.author.username+'#'+msg.author.discriminator)
             msg.channel.send(helpEmbed)
         }
 
@@ -48,7 +49,7 @@ bot.on('message', (msg)=>{
                 .setTitle('Help for command `ban`')
                 .setColor(config.embedColor)
                 .addFields(
-                    {name: 'Description', value: 'Add users to the list of banned players.'},
+                    {name: 'Description', value: 'Add players to the list of banned players.'},
                     {name: 'Usage', value: '`' + prefix + 'ban {add/remove} {Minecraft username}`'},
                     {name: 'Required permission', value: '`ADMINISTRATOR`'}
                 )
@@ -72,7 +73,7 @@ bot.on('message', (msg)=>{
             console.log('API help execute | User: ' + msg.author.username+'#'+msg.author.discriminator)
             msg.channel.send(executeHelpEmbed)
         }
-        
+
         if(args[2] == 'info'){
             const infoHelpEmbed = new Discord.MessageEmbed()
                 .setTitle('Help for command `info`')
@@ -85,6 +86,21 @@ bot.on('message', (msg)=>{
                 .setFooter(msg.author.username+'#'+msg.author.discriminator)
             console.log('API help info | User: ' + msg.author.username+'#'+msg.author.discriminator)
             msg.channel.send(infoHelpEmbed)
+        }
+
+        if(args[2] == 'list'){
+            const listHelpEmbed = new Discord.MessageEmbed()
+                .setTitle('Help for command `list`')
+                .setColor(config.embedColor)
+                .addFields(
+                    {name:'Description', value:'Get players from lists.'},
+                    {name:'Usage:', value: '`' + prefix + 'list {whitelist/ops/banned}`'},
+                    {name:'Required permission', value:'`ADMINISTRATOR`'}
+                )
+                .setTimestamp()
+                .setFooter(msg.author.username+'#'+msg.author.discriminator)
+            console.log('API help list | User: ' + msg.author.username+'#'+msg.author.discriminator)
+            msg.channel.send(listHelpEmbed)
         }
 
         if(args[2] == 'log'){
@@ -106,7 +122,7 @@ bot.on('message', (msg)=>{
                 .setTitle('Help for command `op`')
                 .setColor(config.embedColor)
                 .addFields(
-                    {name: 'Description', value: 'Add players to the list of opped players.'},
+                    {name: 'Description', value: 'Add players to the list of ops players.'},
                     {name: 'Usage', value: '`' + prefix + 'op {add/remove} {Minecraft username}`'},
                     {name: 'Required permission', value: '`ADMINISTRATOR`'}
                 )
@@ -256,9 +272,9 @@ bot.on('message', (msg)=>{
             console.log('API ban | User: ' + msg.author.username+'#'+msg.author.discriminator)
             msg.channel.send(helpBanEmbed)
         }
-
-        if(msg.member.hasPermission('ADMINISTRATOR')) {
-            if(args[2] == "add"){
+        
+        if(args[2] == "add"){
+            if(msg.member.hasPermission('ADMINISTRATOR')) {
                 if(args[3] == undefined){
                     msg.channel.send('Please specify a player!')
                 }
@@ -274,7 +290,11 @@ bot.on('message', (msg)=>{
                 }
             }
 
-            if(args[2] == "remove"){
+            if(!msg.member.hasPermission('ADMINISTRATOR')) return msg.channel.send('You need the permission `Administrator` to ban players!')
+        }
+
+        if(args[2] == "remove"){
+            if(msg.member.hasPermission('ADMINISTRATOR')) {
                 if(args[3] == undefined){
                     msg.channel.send('Please specify a player!')
                 }
@@ -289,9 +309,9 @@ bot.on('message', (msg)=>{
                     APIBanRemove();
                 }
             }
-        }
 
-        if(!msg.member.hasPermission('ADMINISTRATOR')) return msg.channel.send('You need the permission `Administrator` to ban users!')
+            if(!msg.member.hasPermission('ADMINISTRATOR')) return msg.channel.send('You need the permission `Administrator` to ban players!')
+        }
     }
     
     if(msg.content.startsWith(prefix + 'execute')){
@@ -313,6 +333,7 @@ bot.on('message', (msg)=>{
             APIExecute();
         
         }
+
         if(!msg.member.hasPermission('ADMINISTRATOR')) return msg.channel.send('You need the permission `Administrator` to execute commands!')
     }
     
@@ -332,6 +353,111 @@ bot.on('message', (msg)=>{
             msg.channel.send(infoEmbed)
     }
 
+    if(msg.content.startsWith(prefix + 'list')) {
+        const args = msg.content.split(" ");
+        if(args[2] == undefined){
+            const listHelpEmbed = new Discord.MessageEmbed()
+                .setTitle('Help for command `list`')
+                .setColor(config.embedColor)
+                .addFields(
+                    {name:'Description', value:'Get players from lists.'},
+                    {name:'Usage:', value: '`' + prefix + 'list {whitelist/ops/banned}`'},
+                    {name:'Required permission', value:'`ADMINISTRATOR`'}
+                )
+                .setTimestamp()
+                .setFooter(msg.author.username+'#'+msg.author.discriminator)
+            console.log('API list | User: ' + msg.author.username+'#'+msg.author.discriminator)
+            msg.channel.send(listHelpEmbed)
+        }
+        
+        if(args[2] == 'whitelist'){
+            if(msg.member.hasPermission('ADMINISTRATOR')) {
+                async function APIListWhitelist(){
+                    try {
+                        let listWhitelist = server.getPlayerList("whitelist");
+                        let entriesWhitelist = await listWhitelist.getEntries();
+                        const listWhitelistEmbed = new Discord.MessageEmbed()
+                            .setTitle('Whitelisted players')
+                            .addFields({name:'Players', value:entriesWhitelist})
+                            .setColor(config.embedColor)
+                            .setTimestamp()
+                            .setFooter(msg.author.username+'#'+msg.author.discriminator)
+                        console.log('API list whitelist | User: ' + msg.author.username+'#'+msg.author.discriminator)
+                        msg.channel.send(listWhitelistEmbed);
+                    } catch (e) {
+                        console.error('An error ocurred while getting list "whitelist": ' + e.message);
+                        if (e.message == 'MessageEmbed field values may not be empty.')
+                            msg.channel.send('There are no players in that list!')
+                        else{
+                            msg.channel.send('An error ocurred while getting that list: `'+e.message+'`')
+                        }
+                    }
+                }
+                APIListWhitelist();      
+            }
+
+            if(!msg.member.hasPermission('ADMINISTRATOR')) return msg.channel.send('You need the permission `Administrator` to get that list of players!')
+        }
+
+        if(args[2] == 'ops'){
+            if(msg.member.hasPermission('ADMINISTRATOR')) {
+                async function APIListOPs(){
+                    try {
+                        let listOPs = server.getPlayerList("ops");
+                        let entriesOPs = await listOPs.getEntries();
+                        const listOPsEmbed = new Discord.MessageEmbed()
+                            .setTitle('Ops players')
+                            .addFields({name:'Players', value:entriesOPs})
+                            .setColor(config.embedColor)
+                            .setTimestamp()
+                            .setFooter(msg.author.username+'#'+msg.author.discriminator)
+                        console.log('API list ops | User: ' + msg.author.username+'#'+msg.author.discriminator)
+                        msg.channel.send(listOPsEmbed);
+                    } catch (e) {
+                        console.error('An error ocurred while getting list "whitelist": ' + e.message);
+                        if (e.message == 'MessageEmbed field values may not be empty.')
+                            msg.channel.send('There are no players in that list!')
+                        else{
+                            msg.channel.send('An error ocurred while getting that list: `'+e.message+'`')
+                        }
+                    }
+                }
+                APIListOPs();
+            }
+
+            if(!msg.member.hasPermission('ADMINISTRATOR')) return msg.channel.send('You need the permission `Administrator` to get that list of players!')
+        }
+
+        if(args[2] == 'banned'){
+            if(msg.member.hasPermission('ADMINISTRATOR')) {
+                async function APIListBanned(){
+                    try {
+                        let listBanned = server.getPlayerList("banned-players");
+                        let entriesBanned = await listBanned.getEntries();
+                        const listBannedEmbed = new Discord.MessageEmbed()
+                            .setTitle('Banned players')
+                            .addFields({name:'Players', value:entriesBanned})
+                            .setColor(config.embedColor)
+                            .setTimestamp()
+                            .setFooter(msg.author.username+'#'+msg.author.discriminator)
+                        console.log('API list banned | User: ' + msg.author.username+'#'+msg.author.discriminator)
+                        msg.channel.send(listBannedEmbed);
+                    } catch (e) {
+                        console.error('An error ocurred while getting list "whitelist": ' + e.message);
+                        if (e.message == 'MessageEmbed field values may not be empty.')
+                            msg.channel.send('There are no players in that list!')
+                        else{
+                            msg.channel.send('An error ocurred while getting that list: `'+e.message+'`')
+                        }
+                    }
+                }
+                APIListBanned();
+            }
+
+            if(!msg.member.hasPermission('ADMINISTRATOR')) return msg.channel.send('You need the permission `Administrator` to get that list of players!')
+        }
+    }
+
     if(msg.content.startsWith(prefix + 'log')){
         async function APILog() {
             const logMsg = await msg.channel.send('Getting log from server...')
@@ -349,7 +475,7 @@ bot.on('message', (msg)=>{
                 .setTitle('Help for command `op`')
                 .setColor(config.embedColor)
                 .addFields(
-                    {name: 'Description', value: 'Add players to the list of opped players.'},
+                    {name: 'Description', value: 'Add players to the list of ops players.'},
                     {name: 'Usage', value: '`' + prefix + 'op {add/remove} {Minecraft username}`'},
                     {name: 'Required permission', value: '`ADMINISTRATOR`'}
                 )
@@ -359,8 +485,8 @@ bot.on('message', (msg)=>{
             msg.channel.send(helpOPEmbed)
         }
 
-        if(msg.member.hasPermission('ADMINISTRATOR')) {
-            if(args[2] == "add"){
+        if(args[2] == "add"){
+            if(msg.member.hasPermission('ADMINISTRATOR')) {
                 if(args[3] == undefined){
                     msg.channel.send('Please specify a player!')
                 }
@@ -370,13 +496,17 @@ bot.on('message', (msg)=>{
                     let list = server.getPlayerList("ops")
                     await list.addEntry(args[3])
                     msg.channel.send('User **'+args[3]+'** was added to the list of OPs.')
-                    console.log('User ' + msg.author.username+'#'+msg.author.discriminator + ' added ' + args[3] + ' to the list of opped players.')
+                    console.log('User ' + msg.author.username+'#'+msg.author.discriminator + ' added ' + args[3] + ' to the list of ops players.')
                     }
                     APIOPAdd();
                 }
             }
 
-            if(args[2] == "remove"){
+            if(!msg.member.hasPermission('ADMINISTRATOR')) return msg.channel.send('You need the permission `Administrator` to op players!')
+        }
+
+        if(args[2] == "remove"){
+            if(msg.member.hasPermission('ADMINISTRATOR')) {
                 if(args[3] == undefined){
                     msg.channel.send('Please specify a player!')
                 }
@@ -385,14 +515,14 @@ bot.on('message', (msg)=>{
                     async function APIOPRemove(){
                         let list = server.getPlayerList("ops")
                         await list.deleteEntry(args[3])
-                        msg.channel.send('User **'+args[3]+'** was removed from the list of opped players.')
-                        console.log('User ' + msg.author.username+'#'+msg.author.discriminator + ' removed ' + args[3] + ' from the list of opped players.')
+                        msg.channel.send('User **'+args[3]+'** was removed from the list of ops players.')
+                        console.log('User ' + msg.author.username+'#'+msg.author.discriminator + ' removed ' + args[3] + ' from the list of ops players.')
                     }
                     APIOPRemove();
                 }
             }
 
-            if(!msg.member.hasPermission('ADMINISTRATOR')) return msg.channel.send('You need the permission `Administrator` to op users!')
+            if(!msg.member.hasPermission('ADMINISTRATOR')) return msg.channel.send('You need the permission `Administrator` to op players!')
         }
     }
 
@@ -414,34 +544,40 @@ bot.on('message', (msg)=>{
         }
 
         if(args[2] == 'check'){
-            async function APIRAMGet() {
-                try {
-                    let ram = await server.getRAM();
-                    msg.channel.send("This server has " + ram + " GB RAM.");
-                    console.log('API ram check | User: ' + msg.author.username+'#'+msg.author.discriminator)
-                } catch (e) {
-                    console.error('Error while checking server RAM: ' + e.message);
-                    msg.channel.send('An error occured while getting RAM: `' + e.message + '`.')   
-                }
-            }   
-            APIRAMGet();
+            if(msg.member.hasPermission('ADMINISTRATOR')) {
+                async function APIRAMGet() {
+                    try {
+                        let ram = await server.getRAM();
+                        msg.channel.send("This server has " + ram + " GB RAM.");
+                        console.log('API ram check | User: ' + msg.author.username+'#'+msg.author.discriminator)
+                    } catch (e) {
+                        console.error('Error while checking server RAM: ' + e.message);
+                        msg.channel.send('An error occured while getting RAM: `' + e.message + '`.')   
+                    }
+                }   
+                APIRAMGet();
+            }
+            
+            if(!msg.member.hasPermission('ADMINISTRATOR')) return msg.channel.send('You need the permission `Administrator` to check the RAM!')
         }
 
         if(args[2] == 'set'){
-            async function APIRAMSet() {
-                try {
-                    await server.setRAM(args[3]);
-                    msg.channel.send('RAM has been set to `' + args[3] + '`.')
-                    console.log(msg.author.username+'#'+msg.author.discriminator + ' set RAM to ' + args[3])
-                } catch (e) {
-                    msg.channel.send('An error ocrrued while setting RAM: `' + e.message + '`')
-                    console.error('Error while setting RAM: ' +e.message);
+            if(msg.member.hasPermission('ADMINISTRATOR')) {
+                async function APIRAMSet() {
+                    try {
+                        await server.setRAM(args[3]);
+                        msg.channel.send('RAM has been set to `' + args[3] + '`.')
+                        console.log(msg.author.username+'#'+msg.author.discriminator + ' set RAM to ' + args[3])
+                    } catch (e) {
+                        msg.channel.send('An error ocrrued while setting RAM: `' + e.message + '`')
+                        console.error('Error while setting RAM: ' +e.message);
+                    }
                 }
+                APIRAMSet();
             }
-            APIRAMSet();
-        }
 
-        if(!msg.member.hasPermission('ADMINISTRATOR')) return msg.channel.send('You need the permission `Administrator` to check/change the RAM!')
+            if(!msg.member.hasPermission('ADMINISTRATOR')) return msg.channel.send('You need the permission `Administrator` to change the RAM!')
+        }
     }
 
     if(msg.content.startsWith(prefix + 'restart')){
@@ -515,7 +651,7 @@ bot.on('message', (msg)=>{
                  catch (error) {
                     console.log('Error while getting server status: ' + error.message)
                     if(error.message == "Cannot read property 'get' of undefined"){
-                        msg.channel.send('I could not find that server!')
+                        msg.channel.send('Server not found!')
                     } 
                 }
                 
