@@ -340,7 +340,7 @@ bot.on('message', (msg)=>{
     if(msg.content.startsWith(prefix + 'info')){
         const infoEmbed = new Discord.MessageEmbed()
             .setTitle('PhoenixAPI#4772')
-            .setDescription('PhoenixAPI is a bot developed with discord.js. The main reason of this bot is the managment for [exaroton](https://exaroton.com/) servers using the exaroton API.')
+            .setDescription('PhoenixAPI is a bot developed with discord.js. The main reason of this bot is the managment of [exaroton](https://exaroton.com/) servers using the exaroton API.')
             .setColor(config.embedColor)
             .addFields(
                 {name:'Owner', value:'`Alex22#7756`', inline:true},
