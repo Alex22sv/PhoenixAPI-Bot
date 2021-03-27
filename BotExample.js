@@ -23,7 +23,7 @@ bot.on('message', (msg)=>{
             const helpEmbed = new Discord.MessageEmbed()
                 .setTitle('PhoenixAPI | Prefix: `' + prefix + '`')
                 .setColor(config.embedColor)
-                .setDescription('`account`, `ban`, `execute`, `log`, `op`, `ram`, `restart`, `servers`, `status`, `start`, `stop`, `support`, `whitelist`')
+                .setDescription('`account`, `ban`, `execute`, `info`, `log`, `op`, `ram`, `restart`, `servers`, `status`, `start`, `stop`, `whitelist`')
                 .setFooter(msg.author.username+'#'+msg.author.discriminator) 
             console.log('API help | User: ' + msg.author.username+'#'+msg.author.discriminator)
             msg.channel.send(helpEmbed)
@@ -203,21 +203,6 @@ bot.on('message', (msg)=>{
             console.log('API help stop | User: ' + msg.author.username+'#'+msg.author.discriminator)
             msg.channel.send(stopHelpEmbed)
         }
-
-        if(args[2] == 'support'){
-            const supportHelpEmbed = new Discord.MessageEmbed()
-                .setTitle('Help for command `support`')
-                .setColor(config.embedColor)
-                .addFields(
-                    {name:'Description', value:'Give useful links about the exaroton API.'},
-                    {name:'Usage', value:'`' + prefix + 'support`'}
-                )
-                .setTimestamp()
-                .setFooter(msg.author.username+'#'+msg.author.discriminator)
-            console.log('API help support | User: ' + msg.author.username+'#'+msg.author.discriminator)
-            msg.channel.send(supportHelpEmbed)
-        }
-        
         
         if(args[2] == 'whitelist'){
             const whitelistHelpEmbed = new Discord.MessageEmbed()
@@ -576,18 +561,6 @@ bot.on('message', (msg)=>{
         }
 
         if(!msg.member.hasPermission('ADMINISTRATOR')) return msg.channel.send('You need the permission `Administrator` to stop the server!')
-    }
-
-    if(msg.content.startsWith(prefix + 'support')){
-        const supportEmbed = new Discord.MessageEmbed()
-            .setTitle('Useful links about PhoenixAPI')
-            .setColor(config.embedColor)
-            .addFields(
-                {name:'GitHub', value:'[click here](https://github.com/Alex0622/PhoenixAPI-Bot)'},
-                {name:'API documentation', value:'[click here](https://support.exaroton.com/hc/en-us/articles/360011926177-API-documentation)'}
-            )
-        console.log('API support | User: ' + msg.author.username+'#'+msg.author.discriminator)
-        msg.channel.send(supportEmbed)
     }
 
     if(msg.content.startsWith(prefix + "whitelist")){
