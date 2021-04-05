@@ -586,6 +586,7 @@ bot.on('message', (msg)=>{
                 const restartMsg = await msg.channel.send('Trying to restart server...')
                 console.log(msg.author.username+'#'+msg.author.discriminator + ' used "API restart", preparing to restart the server...')
                 try {
+                    await server.executeCommand('say [API] This server will be restarted in a few seconds.');
                     await server.restart();
                     await restartMsg.edit('Server should be restarting right now.')
                 } catch (e) {
@@ -686,6 +687,7 @@ bot.on('message', (msg)=>{
                 const stopMsg = await msg.channel.send('Trying to stop server...')
                 console.log(msg.author.username+'#'+msg.author.discriminator +' used "API stop", preparing to stop the server...')
                 try {
+                    await server.executeCommand('say [API] This server will be stopped in a few seconds.');
                     await server.stop();
                     await stopMsg.edit('Server should be offline soon.')
                 } catch (e) {
