@@ -332,8 +332,8 @@ bot.on('message', (msg)=>{
         if(msg.member.hasPermission('ADMINISTRATOR')) {
             async function APIExecute() {
                 const executeMsg = await msg.channel.send('Trying to execute commands...')
-                console.log('API execute | User: ' + msg.author.username+'#'+msg.author.discriminator)
                 try {
+                    console.log('API execute | User: ' + msg.author.username+'#'+msg.author.discriminator)
                     await server.executeCommand('say Executing commands through API...')
                     await server.executeCommand('save-all');
 
@@ -563,26 +563,31 @@ bot.on('message', (msg)=>{
         if(args[2] != undefined){
             async function APIPLayers() {
                 try {
+                    
                     let name = args[2];
                     let serverLists = await exarotonClient.getServers();
-                    let serverPlayers = serverLists.find(serverStatus => serverStatus.name === name);    
-                    const embedPlayers = new Discord.MessageEmbed()                            
-                        .setTitle('Players in ' + serverPlayers.name)
-                        .setDescription(serverPlayers.players.list)
-                        .setColor(config.embedColor)
-                        .setTimestamp()
-                        .setFooter(msg.author.username+'#'+msg.author.discriminator)
-                    console.log('API players ' + args[2] + ' | User: ' + msg.author)
-                    msg.channel.send(embedPlayers)
-                    
-
+                    let serverPlayers = serverLists.find(serverStatus => serverStatus.name === name);   
+                    if(serverPlayers.players.count != 0){ 
+                        const embedPlayers = new Discord.MessageEmbed()                            
+                            .setTitle('Players in ' + serverPlayers.name)
+                            .setDescription(serverPlayers.players.list)
+                            .setColor(config.embedColor)
+                            .setTimestamp()
+                            .setFooter(msg.author.username+'#'+msg.author.discriminator)
+                        console.log('API players ' + args[2] + ' | User: ' + msg.author)
+                        msg.channel.send(embedPlayers)
+                    }
+                    if(serverPlayers.players.count == 0){
+                        msg.channel.send('There are no players playing in that server.')
+                    }
                 } catch (e){
                     console.log('Error while gettings the list of players: ' + e.message)
-                    if (e.message == "Cannot read property 'name' of undefined")
+                    if(e.message == "Cannot read property 'name' of undefined"){
                         msg.channel.send('Server not found!')
+                    }
                     else{
                         msg.channel.send('An error ocurred while getting that list: `'+e.message+'`')
-                }
+                    }
                 }
             }
             APIPLayers();
