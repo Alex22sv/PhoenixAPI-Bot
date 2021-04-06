@@ -24,7 +24,7 @@ bot.on('message', (msg)=>{
             const helpEmbed = new Discord.MessageEmbed()
                 .setTitle('PhoenixAPI | Prefix: `' + prefix + '`')
                 .setColor(config.embedColor)
-                .setDescription('`account`, `ban`, `execute`, `info`, `list`, `log`, `op`, `ram`, `restart`, `servers`, `status`, `start`, `stop`, `whitelist`')
+                .setDescription('`account`, `ban`, `execute`, `info`, `list`, `log`, `op`, `players`, `ram`, `restart`, `servers`, `status`, `start`, `stop`, `whitelist`')
                 .setFooter(msg.author.username+'#'+msg.author.discriminator) 
             console.log('API help | ' +  'User: ' + msg.author.username+'#'+msg.author.discriminator)
             msg.channel.send(helpEmbed)
@@ -132,6 +132,20 @@ bot.on('message', (msg)=>{
             msg.channel.send(opHelpEmbed)
         }
 
+        if(args[2] == 'players'){
+            const opHelpEmbed = new Discord.MessageEmbed()
+                .setTitle('Help for command `players`')
+                .setColor(config.embedColor)
+                .addFields(
+                    {name: 'Description', value: 'Check the current players playing on the server.'},
+                    {name: 'Usage', value: '`' + prefix + 'players {server name}`'}
+                )
+                .setTimestamp()
+                .setFooter(msg.author.username+'#'+msg.author.discriminator)
+            console.log('API help players | User: ' + msg.author.username+'#'+msg.author.discriminator)
+            msg.channel.send(opHelpEmbed)
+        }
+
         if(args[2] == 'ram'){
             const ramHelpEmbed = new Discord.MessageEmbed()
                 .setTitle('Help for command `ram`')
@@ -183,7 +197,7 @@ bot.on('message', (msg)=>{
                 .setTitle('Help for command `status`')
                 .setColor(config.embedColor)
                 .addFields(
-                    {name:'Description', value:'Give the current status of the server mentioned.'},
+                    {name:'Description', value:'Give the current status of the given server.'},
                     {name:'Usage', value: '`' + prefix + 'status {server name}`'}
                 )
                 .setTimestamp()
@@ -279,7 +293,7 @@ bot.on('message', (msg)=>{
                     msg.channel.send('Please specify a player!')
                 }
                 
-                if(args[3] !== undefined){
+                if(args[3] != undefined){
                     async function APIBanAdd(){     
                     let list = server.getPlayerList("banned-players")
                     await list.addEntry(args[3])
@@ -299,7 +313,7 @@ bot.on('message', (msg)=>{
                     msg.channel.send('Please specify a player!')
                 }
                 
-                if(args[3] !== undefined){
+                if(args[3] != undefined){
                     async function APIBanRemove(){
                         let list = server.getPlayerList("banned-players")
                         await list.deleteEntry(args[3])
@@ -322,9 +336,8 @@ bot.on('message', (msg)=>{
                 try {
                     await server.executeCommand('say Executing commands through API...')
                     await server.executeCommand('save-all');
-                    await server.executeCommand('insert Minecraft command here');
 
-                    await executeMsg.edit('Commands executed succesfully')
+                    await executeMsg.edit('Commands executed succesfully.')
                 } catch (e) {
                     console.error('An error ocurred while executing commands: '+ e.message);
                     await executeMsg.edit('An error ocurred while executing command: `' + e.message + '`');
@@ -491,7 +504,7 @@ bot.on('message', (msg)=>{
                     msg.channel.send('Please specify a player!')
                 }
 
-                if(args[3] !== undefined){
+                if(args[3] != undefined){
                     async function APIOPAdd(){
                     let list = server.getPlayerList("ops")
                     await list.addEntry(args[3])
@@ -511,7 +524,7 @@ bot.on('message', (msg)=>{
                     msg.channel.send('Please specify a player!')
                 }
                 
-                if(args[3] !== undefined){
+                if(args[3] != undefined){
                     async function APIOPRemove(){
                         let list = server.getPlayerList("ops")
                         await list.deleteEntry(args[3])
@@ -523,6 +536,51 @@ bot.on('message', (msg)=>{
             }
 
             if(!msg.member.hasPermission('ADMINISTRATOR')) return msg.channel.send('You need the permission `Administrator` to op players!')
+        }
+    }
+
+    if(msg.content.startsWith(prefix + 'players')) {
+        const args = msg.content.split(" ");
+        if(args[2] == undefined){
+            const helpPlayersEmbed = new Discord.MessageEmbed()
+                .setTitle('Help for command `players`')
+                .setColor(config.embedColor)
+                .addFields(
+                    {name: 'Description', value: 'Check the current players playing on the server.'},
+                    {name: 'Usage', value: '`' + prefix + 'players {server name}`'}
+                )
+                .setTimestamp()
+                .setFooter(msg.author.username+'#'+msg.author.discriminator)
+            console.log('API players | User: ' + msg.author.username+'#'+msg.author.discriminator)
+            msg.channel.send(helpPlayersEmbed)
+        }
+        
+        if(args[2] != undefined){
+            async function APIPLayers() {
+                try {
+                    let name = args[2];
+                    let serverLists = await exarotonClient.getServers();
+                    let serverPlayers = serverLists.find(serverStatus => serverStatus.name === name);    
+                    const embedPlayers = new Discord.MessageEmbed()                            
+                        .setTitle('Players in ' + serverPlayers.name)
+                        .setDescription(serverPlayers.players.list)
+                        .setColor(config.embedColor)
+                        .setTimestamp()
+                        .setFooter(msg.author.username+'#'+msg.author.discriminator)
+                    console.log('API players ' + args[2] + ' | User: ' + msg.author)
+                    msg.channel.send(embedPlayers)
+                    
+
+                } catch (e){
+                    console.log('Error while gettings the list of players: ' + e.message)
+                    if (e.message == "Cannot read property 'name' of undefined")
+                        msg.channel.send('Server not found!')
+                    else{
+                        msg.channel.send('An error ocurred while getting that list: `'+e.message+'`')
+                }
+                }
+            }
+            APIPLayers();
         }
     }
 
@@ -612,7 +670,7 @@ bot.on('message', (msg)=>{
 
     if(msg.content.startsWith(prefix + "status")){
         const args = msg.content.split(" ");
-        if(args[2] !== undefined){
+        if(args[2] != undefined){
             async function APIStatus(){
                 let name = args[2];
                 let serverLists = await exarotonClient.getServers();
@@ -647,19 +705,34 @@ bot.on('message', (msg)=>{
                         .setTimestamp()
                         .setFooter('#'+serverStatus.id)
                     msg.channel.send(StatusEmbed)
-                    console.log('API server '+args[2]+ ' | User: ' +msg.author.username+"#"+msg.author.discriminator)
+                    console.log('API status '+args[2]+ ' | User: ' +msg.author.username+"#"+msg.author.discriminator)
                 }
                  catch (error) {
                     console.log('Error while getting server status: ' + error.message)
                     if(error.message == "Cannot read property 'get' of undefined"){
                         msg.channel.send('Server not found!')
-                    } 
+                    }
+                    else{
+                        msg.channel.send('An error ocurred while getting server status: ' + error.message)
+                    }
                 }
                 
             }
             APIStatus();
         }
-        if(args[2] == undefined) return msg.channel.send('Please specify a server in your message!')
+        if(args[2] == undefined) {
+            const helpStatusEmbed = new Discord.MessageEmbed()
+                .setTitle('Help for command `status`')
+                .setColor(config.embedColor)
+                .addFields(
+                    {name:'Description', value:'Give the current status of the given server.'},
+                    {name:'Usage', value: '`' + prefix + 'status {server name}`'}
+                )
+                .setTimestamp()
+                .setFooter(msg.author.username+'#'+msg.author.discriminator)
+            console.log('API status | User: ' + msg.author.username+'#'+msg.author.discriminator)
+            msg.channel.send(helpStatusEmbed)
+        }
     }
     
     if(msg.content.startsWith(prefix + 'start')){
@@ -722,7 +795,7 @@ bot.on('message', (msg)=>{
                 msg.channel.send('Pleasy specify an user!')
             }
 
-            if(args[3] !== undefined) {
+            if(args[3] != undefined) {
                 async function APIWhitelistAdd(){
                 let list = server.getPlayerList("whitelist")
                 await list.addEntry(args[3])
@@ -738,7 +811,7 @@ bot.on('message', (msg)=>{
                 msg.channel.send('Please specify a player!')
             }
 
-            if(args[3] !== undefined){
+            if(args[3] != undefined){
                 async function APIWhitelistRemove(){
                 let list = server.getPlayerList("whitelist")
                 await list.deleteEntry(args[3])
