@@ -473,10 +473,15 @@ bot.on('message', (msg)=>{
 
     if(msg.content.startsWith(prefix + 'log')){
         async function APILog() {
-            const logMsg = await msg.channel.send('Getting log from server...')
-            let logs = await server.shareLogs();
-            logMsg.edit('**Server log:** ' + logs)
-            console.log('API log | User: ' + msg.author.username+'#'+msg.author.discriminator + ' | link: ' + logs )
+            try {
+                const logMsg = await msg.channel.send('Getting log from server...')
+                let logs = await server.shareLogs();
+                logMsg.edit('**Server log:** ' + logs)
+                console.log('API log | User: ' + msg.author.username+'#'+msg.author.discriminator + ' | link: ' + logs )
+            } catch(e) {
+                console.log('Error while getting server log: ' + e.message)
+                msg.channel.send('An error ocurred while getting the server log: `'+e.message+'`')
+            }
         }
         APILog();
     }
