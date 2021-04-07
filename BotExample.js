@@ -459,7 +459,7 @@ bot.on('message', (msg)=>{
             .setColor(config.embedColor)
             .addFields(
                 {name:'Owner', value:'`Alex22#7756`', inline:true},
-                {name:'Current version', value:'`1.2.1`', inline:true},
+                {name:'Current version', value:'`1.2.2`', inline:true},
                 {name:'Prefix', value:'`'+prefix+'`', inline:true},
                 {name:'Links', value:'[GitHub](https://github.com/Alex0622/PhoenixAPI-Bot) | [exaroton API documentation](https://support.exaroton.com/hc/en-us/articles/360011926177-API-documentation)', inline:false}
             )
