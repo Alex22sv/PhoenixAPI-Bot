@@ -24,7 +24,7 @@ bot.on('message', (msg)=>{
             const helpEmbed = new Discord.MessageEmbed()
                 .setTitle('PhoenixAPI | Prefix: `' + prefix + '`')
                 .setColor(config.embedColor)
-                .setDescription('`account`, `ban`, `execute`, `info`, `list`, `log`, `op`, `players`, `ram`, `restart`, `servers`, `status`, `start`, `stop`, `whitelist`')
+                .setDescription('`account`, `ban`, `dynip`, `execute`, `info`, `list`, `log`, `op`, `players`, `ram`, `restart`, `servers`, `status`, `start`, `stop`, `whitelist`')
                 .setFooter(msg.author.username+'#'+msg.author.discriminator) 
             console.log('API help | ' +  'User: ' + msg.author.username+'#'+msg.author.discriminator)
             msg.channel.send(helpEmbed)
@@ -57,6 +57,20 @@ bot.on('message', (msg)=>{
                 .setFooter(msg.author.username+'#'+msg.author.discriminator)
             console.log('API help ban | User: ' + msg.author.username+'#'+msg.author.discriminator)
             msg.channel.send(banHelpEmbed)
+        }
+
+        if(args[2] == 'dynip'){
+            const dynipHelpEmbed = new Discord.MessageEmbed()
+                .setTitle('Help for command `dynip`')
+                .setColor(config.embedColor)
+                .addFields(
+                    {name: 'Description', value: "Get the server's DynIP. Note: The server must be online."},
+                    {name: 'Usage', value: '`' + prefix + 'dynip {server name}`'}
+                )
+                .setTimestamp()
+                .setFooter(msg.author.username+'#'+msg.author.discriminator)
+            console.log('API help dynip | User: ' + msg.author.username+'#'+msg.author.discriminator)
+            msg.channel.send(dynipHelpEmbed)
         }
 
         if(args[2] == 'execute'){
@@ -327,8 +341,52 @@ bot.on('message', (msg)=>{
             if(!msg.member.hasPermission('ADMINISTRATOR')) return msg.channel.send('You need the permission `Administrator` to ban players!')
         }
     }
-    
-    
+
+    if(msg.content.startsWith(prefix + 'dynip')){
+        const args = msg.content.split(" ");
+        if(args[2] == undefined) {
+            const helpDynIPEmbed = new Discord.MessageEmbed()
+                .setTitle('Help for command `dynip`')
+                .setColor(config.embedColor)
+                .addFields(
+                    {name: 'Description', value: "Get the server's DynIP. Note: The server must be online."},
+                    {name: 'Usage', value: '`' + prefix + 'dynip {server name}`'}
+                )
+                .setTimestamp()
+                .setFooter(msg.author.username+'#'+msg.author.discriminator)
+            console.log('API help dynip | User: ' + msg.author.username+'#'+msg.author.discriminator)
+            msg.channel.send(helpDynIPEmbed)
+        }
+
+        if(args[2] != undefined) {
+            async function APIDynIP() {
+                let name = args[2];
+                let serverLists = await exarotonClient.getServers();
+                let serverDynIP = serverLists.find(serverStatus => serverStatus.name === name);
+                try {
+                    await serverDynIP.get();
+                    if(serverDynIP.host == null){
+                        msg.channel.send("I can't get the DynIP of that server because it's not online.")
+                        console.log('API  dynip ' + args[2] + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
+                    }
+                    if(serverDynIP.host != null){
+                        msg.channel.send('The DynIP of "' + serverDynIP.name + '" is: `' + serverDynIP.host + ':' +serverDynIP.port + '`')
+                        console.log('API  dynip ' + args[2] + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
+                    }
+                } catch (error) {
+                    console.log('Error while getting DynIP: ' + error.message)
+                    if(error.message == "Cannot read property 'get' of undefined"){
+                        msg.channel.send('Server not found!')
+                    }
+                    else{
+                        msg.channel.send('An error ocurred while getting the DynIP: `' + error.message + '`')    
+                    }
+                }
+            }
+            APIDynIP();
+        }
+    }
+
     if(msg.content.startsWith(prefix + 'execute')){
         if(msg.member.hasPermission('ADMINISTRATOR')) {
             const args = msg.content.split(" ");
@@ -825,7 +883,7 @@ bot.on('message', (msg)=>{
                         msg.channel.send('Server not found!')
                     }
                     else{
-                        msg.channel.send('An error ocurred while getting server status: ' + error.message)
+                        msg.channel.send('An error ocurred while getting server status: `' + error.message + '`')
                     }
                 }
                 
