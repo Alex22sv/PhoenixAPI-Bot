@@ -390,124 +390,22 @@ bot.on('message', (msg)=>{
 
     if(msg.content.startsWith(prefix + 'execute')){
         if(msg.member.hasPermission('ADMINISTRATOR')) {
-            const args = msg.content.split(" ");
-            if(args[2] != undefined) {
-                if(args[3] != undefined) {
-                    if(args[4] != undefined) {
-                        if(args[5] != undefined){
-                            if(args[6] != undefined){
-                                async function APIExecute1() {
-                                    const executeMsg = await msg.channel.send('Trying to execute commands...')
-                                    console.log(msg.content + '| User: ' + msg.author.username+'#'+msg.author.discriminator)
-                                    try {
-                                        await server.executeCommand('say Executing commands through API...')
-                                        await server.executeCommand(args[2] +' '+ args[3] +' '+ args[4] +' '+ args[5] +' '+ args[6])
-                                        await server.executeCommand('save-all');
-    
-                                        await executeMsg.edit('Commands executed succesfully.')
-                                    } catch (e) {
-                                        console.error('An error ocurred while executing commands: '+ e.message);
-                                        await executeMsg.edit('An error ocurred while executing command: `' + e.message + '`');
-                                    }    
-                                }
-                                APIExecute1();
-                            }
+            async function APIExecute() {
+                const executeMsg = await msg.channel.send('Trying to execute commands...')
+                console.log('API execute | User: ' + msg.author.username+'#'+msg.author.discriminator)
+                try {
+                    await server.executeCommand('say Executing commands through API...');
+                    await server.executeCommand('save-all');
 
-                            if(args[6] == undefined){
-                                if(args[5] == undefined){
-                                    async function APIExecute1() {
-                                        const executeMsg = await msg.channel.send('Trying to execute commands...')
-                                        console.log(msg.content + '| User: ' + msg.author.username+'#'+msg.author.discriminator)
-                                        try {
-                                            await server.executeCommand('say Executing commands through API...')
-                                            await server.executeCommand(args[2] +' '+ args[3] +' '+ args[4] +' '+ args[5])
-                                            await server.executeCommand('save-all');
-        
-                                            await executeMsg.edit('Commands executed succesfully.')
-                                        } catch (e) {
-                                            console.error('An error ocurred while executing commands: '+ e.message);
-                                            await executeMsg.edit('An error ocurred while executing command: `' + e.message + '`');
-                                        }    
-                                    }
-                                    APIExecute1();
-                                }
-                            }
-                        }
-
-                        if(args[5] == undefined){
-                            async function APIExecute1() {
-                                const executeMsg = await msg.channel.send('Trying to execute commands...')
-                                console.log(msg.content + '| User: ' + msg.author.username+'#'+msg.author.discriminator)
-                                try {
-                                    await server.executeCommand('say Executing commands through API...')
-                                    await server.executeCommand(args[2] +' '+ args[3] +' '+ args[4])
-                                    await server.executeCommand('save-all');
-
-                                    await executeMsg.edit('Commands executed succesfully.')
-                                } catch (e) {
-                                    console.error('An error ocurred while executing commands: '+ e.message);
-                                    await executeMsg.edit('An error ocurred while executing command: `' + e.message + '`');
-                                }    
-                            }
-                            APIExecute1();
-                        }
-                    }
-
-                    if(args[4] == undefined) {
-                        async function APIExecute1() {
-                            const executeMsg = await msg.channel.send('Trying to execute commands...')
-                            console.log(msg.content + '| User: ' + msg.author.username+'#'+msg.author.discriminator)
-                            try {
-                                await server.executeCommand('say Executing commands through API...')
-                                await server.executeCommand(args[2] +' '+ args[3])
-                                await server.executeCommand('save-all');
-
-                                await executeMsg.edit('Commands executed succesfully.')
-                            } catch (e) {
-                                console.error('An error ocurred while executing commands: '+ e.message);
-                                await executeMsg.edit('An error ocurred while executing command: `' + e.message + '`');
-                            }    
-                        }
-                        APIExecute1();
-                    }
-                }
-
-                if(args[3] == undefined) {
-                    async function APIExecute1() {
-                        const executeMsg = await msg.channel.send('Trying to execute commands...')
-                        console.log(msg.content + '| User: ' + msg.author.username+'#'+msg.author.discriminator)
-                        try {
-                            await server.executeCommand('say Executing commands through API...')
-                            await server.executeCommand(args[2])
-                            await server.executeCommand('save-all');
-
-                            await executeMsg.edit('Commands executed succesfully.')
-                        } catch (e) {
-                            console.error('An error ocurred while executing commands: '+ e.message);
-                            await executeMsg.edit('An error ocurred while executing command: `' + e.message + '`');
-                        }    
-                    }
-                    APIExecute1();
-                }
+                    await executeMsg.edit('Commands executed succesfully');
+                } catch (e) {
+                    console.error('An error ocurred while executing commands: '+ e.message);
+                    await executeMsg.edit('An error ocurred while executing command: `' + e.message + '`');
+                }    
             }
+            APIExecute();
 
-            if(args[2] == undefined) {
-                async function APIExecute1() {
-                    const executeMsg = await msg.channel.send("You didn't specify any command in your message, so I will use the commands by default.")
-                    console.log('API execute | User: ' + msg.author.username+'#'+msg.author.discriminator)
-                    try {
-                        await server.executeCommand('say Executing commands through API...')
-                        await server.executeCommand('save-all');
-                        await executeMsg.edit('Commands executed succesfully.')
-                    } catch (e) {
-                        console.error('An error ocurred while executing commands: '+ e.message);
-                        await executeMsg.edit('An error ocurred while executing command: `' + e.message + '`');
-                    }    
-                }
-                APIExecute1();   
-            }
         }
-
         if(!msg.member.hasPermission('ADMINISTRATOR')) return msg.channel.send('You need the permission `Administrator` to execute commands!')
     }
     
