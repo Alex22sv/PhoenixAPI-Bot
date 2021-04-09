@@ -25,6 +25,7 @@ bot.on('message', (msg)=>{
                 .setTitle('PhoenixAPI | Prefix: `' + prefix + '`')
                 .setColor(config.embedColor)
                 .setDescription('`account`, `ban`, `dynip`, `execute`, `info`, `list`, `log`, `op`, `players`, `ram`, `restart`, `servers`, `status`, `start`, `stop`, `whitelist`')
+                .setTimestamp()
                 .setFooter(msg.author.username+'#'+msg.author.discriminator) 
             console.log('API help | ' +  'User: ' + msg.author.username+'#'+msg.author.discriminator)
             msg.channel.send(helpEmbed)
