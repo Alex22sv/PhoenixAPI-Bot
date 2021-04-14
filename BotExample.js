@@ -414,9 +414,12 @@ bot.on('message', (msg)=>{
             .setTitle('PhoenixAPI#4772')
             .setDescription('PhoenixAPI is a bot developed with discord.js. The main reason of this bot is the managment of [exaroton](https://exaroton.com/) servers using the exaroton API.')
             .setColor(config.embedColor)
+            .setThumbnail(bot.user.displayAvatarURL())
             .addFields(
                 {name:'Owner', value:'`Alex22#7756`', inline:true},
-                {name:'Current version', value:'`1.2.2`', inline:true},
+                {name:'Developed since', value: '`21/1/2021`', inline:true},
+                {name:'Developed with', value:'`JavaScript & exaroton API`', inline:true},
+                {name:'Current version', value:'[1.2.2](https://github.com/Alex0622/PhoenixAPI-Bot/releases/tag/v1.2.2)', inline:true},
                 {name:'Prefix', value:'`'+prefix+'`', inline:true},
                 {name:'Links', value:'[GitHub](https://github.com/Alex0622/PhoenixAPI-Bot) | [exaroton API documentation](https://support.exaroton.com/hc/en-us/articles/360011926177-API-documentation)', inline:false}
             )
