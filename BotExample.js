@@ -380,14 +380,14 @@ bot.on('message', (msg)=>{
                         msg.channel.send('Server not found!')
                     }
                     else{
-                        msg.channel.send('An error ocurred while getting the DynIP: `' + error.message + '`')    
+                        msg.channel.send('An error occurred while getting the DynIP: `' + error.message + '`')    
                     }
                 }
             }
             APIDynIP();
         }
     }
-
+    
     if(msg.content.startsWith(prefix + 'execute')){
         if(msg.member.hasPermission('ADMINISTRATOR')) {
             async function APIExecute() {
@@ -399,8 +399,8 @@ bot.on('message', (msg)=>{
 
                     await executeMsg.edit('Commands executed succesfully');
                 } catch (e) {
-                    console.error('An error ocurred while executing commands: '+ e.message);
-                    await executeMsg.edit('An error ocurred while executing command: `' + e.message + '`');
+                    console.error('An error occurred while executing commands: '+ e.message);
+                    await executeMsg.edit('An error occurred while executing command: `' + e.message + '`');
                 }    
             }
             APIExecute();
@@ -460,11 +460,11 @@ bot.on('message', (msg)=>{
                         console.log('API list whitelist | User: ' + msg.author.username+'#'+msg.author.discriminator)
                         msg.channel.send(listWhitelistEmbed);
                     } catch (e) {
-                        console.error('An error ocurred while getting list "whitelist": ' + e.message);
+                        console.error('An error occurred while getting list "whitelist": ' + e.message);
                         if (e.message == 'MessageEmbed field values may not be empty.')
                             msg.channel.send('There are no players in that list!')
                         else{
-                            msg.channel.send('An error ocurred while getting that list: `'+e.message+'`')
+                            msg.channel.send('An error occurred while getting that list: `'+e.message+'`')
                         }
                     }
                 }
@@ -489,11 +489,11 @@ bot.on('message', (msg)=>{
                         console.log('API list ops | User: ' + msg.author.username+'#'+msg.author.discriminator)
                         msg.channel.send(listOPsEmbed);
                     } catch (e) {
-                        console.error('An error ocurred while getting list "whitelist": ' + e.message);
+                        console.error('An error occurred while getting list "whitelist": ' + e.message);
                         if (e.message == 'MessageEmbed field values may not be empty.')
                             msg.channel.send('There are no players in that list!')
                         else{
-                            msg.channel.send('An error ocurred while getting that list: `'+e.message+'`')
+                            msg.channel.send('An error occurred while getting that list: `'+e.message+'`')
                         }
                     }
                 }
@@ -518,11 +518,11 @@ bot.on('message', (msg)=>{
                         console.log('API list banned | User: ' + msg.author.username+'#'+msg.author.discriminator)
                         msg.channel.send(listBannedEmbed);
                     } catch (e) {
-                        console.error('An error ocurred while getting list "whitelist": ' + e.message);
+                        console.error('An error occurred while getting list "whitelist": ' + e.message);
                         if (e.message == 'MessageEmbed field values may not be empty.')
                             msg.channel.send('There are no players in that list!')
                         else{
-                            msg.channel.send('An error ocurred while getting that list: `'+e.message+'`')
+                            msg.channel.send('An error occurred while getting that list: `'+e.message+'`')
                         }
                     }
                 }
@@ -542,7 +542,7 @@ bot.on('message', (msg)=>{
                 console.log('API log | User: ' + msg.author.username+'#'+msg.author.discriminator + ' | link: ' + logs )
             } catch(e) {
                 console.log('Error while getting server log: ' + e.message)
-                msg.channel.send('An error ocurred while getting the server log: `'+e.message+'`')
+                msg.channel.send('An error occurred while getting the server log: `'+e.message+'`')
             }
         }
         APILog();
@@ -621,7 +621,7 @@ bot.on('message', (msg)=>{
             console.log('API players | User: ' + msg.author.username+'#'+msg.author.discriminator)
             msg.channel.send(helpPlayersEmbed)
         }
-        
+
         if(args[2] != undefined){
             async function APIPLayers() {
                 try {
@@ -640,15 +640,16 @@ bot.on('message', (msg)=>{
                         msg.channel.send(embedPlayers)
                     }
                     if(serverPlayers.players.count == 0){
+                        console.log('API players ' + args[2] + ' | User: ' + msg.author)
                         msg.channel.send('There are no players playing in that server.')
                     }
                 } catch (e){
                     console.log('Error while gettings the list of players: ' + e.message)
-                    if(e.message == "Cannot read property 'name' of undefined"){
+                    if(e.message == "Cannot read property 'players' of undefined"){
                         msg.channel.send('Server not found!')
                     }
                     else{
-                        msg.channel.send('An error ocurred while getting that list: `'+e.message+'`')
+                        msg.channel.send('An error occurred while getting that list: `'+e.message+'`')
                     }
                 }
             }
@@ -682,7 +683,7 @@ bot.on('message', (msg)=>{
                         console.log('API ram check | User: ' + msg.author.username+'#'+msg.author.discriminator)
                     } catch (e) {
                         console.error('Error while checking server RAM: ' + e.message);
-                        msg.channel.send('An error occured while getting RAM: `' + e.message + '`.')   
+                        msg.channel.send('An error occurred while getting RAM: `' + e.message + '`.')   
                     }
                 }   
                 APIRAMGet();
@@ -720,8 +721,8 @@ bot.on('message', (msg)=>{
                     await server.restart();
                     await restartMsg.edit('Server should be restarting right now.')
                 } catch (e) {
-                    console.error('An error ocurred while restarting the server: ' + e.message);
-                    await restartMsg.edit('An error ocurred while restarting the server: `' + e.message + '`')
+                    console.error('An error occurred while restarting the server: ' + e.message);
+                    await restartMsg.edit('An error occurred while restarting the server: `' + e.message + '`')
                 }
             }
             APIRestart();
@@ -785,7 +786,7 @@ bot.on('message', (msg)=>{
                         msg.channel.send('Server not found!')
                     }
                     else{
-                        msg.channel.send('An error ocurred while getting server status: `' + error.message + '`')
+                        msg.channel.send('An error occurred while getting server status: `' + error.message + '`')
                     }
                 }
                 
@@ -816,8 +817,8 @@ bot.on('message', (msg)=>{
                     await server.start()
                     await startMsg.edit('Server should be online soon.')
                 } catch (e) {
-                    console.error('An error ocurred while starting the server: ' + e.message);
-                    await startMsg.edit('An error ocurred while starting the server: `' + e.message + '`')
+                    console.error('An error occurred while starting the server: ' + e.message);
+                    await startMsg.edit('An error occurred while starting the server: `' + e.message + '`')
                 }
             }
             APIStart();
@@ -836,8 +837,8 @@ bot.on('message', (msg)=>{
                     await server.stop();
                     await stopMsg.edit('Server should be offline soon.')
                 } catch (e) {
-                    console.error('An error ocurred while stopping the server: ' + e.message);
-                    await stopMsg.edit('An error ocurred while stopping the server: `' + e.message + '`')
+                    console.error('An error occurred while stopping the server: ' + e.message);
+                    await stopMsg.edit('An error occurred while stopping the server: `' + e.message + '`')
                 }
             }
             APIStop();
