@@ -5,7 +5,7 @@
   "main": "BotExample.js",
   "dependencies": {
     "discord.js": "^12.5.1",
-    "exaroton": "^1.5.1"
+    "exaroton": "^1.6.1"
   },
   "devDependencies": {},
   "scripts": {
