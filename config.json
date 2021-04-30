@@ -1,8 +1,7 @@
 {
     "prefix" : "API ",
     "exarotonAPIkey" : "",
-    "exarotonServerID" : "",
     "DiscordAPItoken" : "",
-    "generalChannelID" : "",
-    "embedColor" : "#19ba19"
+    "embedColor" : "#19ba19",
+    "errorColor" : "#de0707"
 }
