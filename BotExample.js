@@ -1,13 +1,12 @@
 const Discord = require('discord.js');
 const config = require('./config.json');
 
-const {Client} = require('exaroton');
 const bot = new Discord.Client();
 const prefix = config.prefix;
 
 
 
-const commands = {};
+bot.commands = {};
 const fs = require('fs');
 /* read the commands directory and go through all files */
 for (const file of fs.readdirSync(`${__dirname}/commands`)) {
@@ -16,7 +15,7 @@ for (const file of fs.readdirSync(`${__dirname}/commands`)) {
    /* exclude folders and files that arent javascript */
    if(!file.endsWith('.js') || !fs.lstatSync(path).isFile()) continue;
    const command = require(path);
-   commands[command.name] = command;
+   bot.commands[command.name] = command;
 }
 
 bot.on('ready', () => {
@@ -29,9 +28,9 @@ bot.on('message', async (msg) => {
     if (!msg.content.startsWith(prefix)) return;
 
     const args = msg.content.slice(prefix.length).split(" ");
-    const commandName = args.shift();
+    const commandName = args.shift().toLowerCase();
 
-    const command = commands[commandName];
+    const command = bot.commands[commandName];
     if (!command) return;
   
     await command.execute(msg, args, bot);
