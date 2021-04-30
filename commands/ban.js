@@ -10,7 +10,7 @@ const exarotonClient = new Client(config.exarotonAPIkey);
 module.exports = {
     name: 'ban',
     description: 'Ban players in Minecraft servers.',
-    usage: '`'+'ban {server name} {Minecraft player}`',
+    usage: '`'+prefix+'ban {server name} {Minecraft player}`',
     permission: '`ADMINISTRATOR`',
     execute(msg, args){
         if(args[0] == undefined){
