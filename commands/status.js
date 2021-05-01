@@ -98,7 +98,7 @@ module.exports = {
                     {name:'Players', value:`${server.players.count}/${server.players.max}`, inline:true},
                     {name:'Software', value:`${server.software.name} ${server.software.version}`, inline:true}
                 )
-                .setFooter(msg.author.username+'#'+msg.author.discriminator, msg.member.user.displayAvatarURL())
+                .setFooter(msg.author.username+'#'+msg.author.discriminator+' • '+server.id, msg.member.user.displayAvatarURL())
         }
     }
 }
