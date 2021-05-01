@@ -23,9 +23,11 @@ module.exports = {
 
         if (command === undefined) {
             await msg.channel.send(new Discord.MessageEmbed()
-                .setTitle(`Help for command {${args[0]}}`)
+                .setTitle('Error!')
                 .setColor(errorColor)
-                .setDescription('Command not found')
+                .setDescription(`Command {${args[0]}} not found.`)
+                .setTimestamp()
+                .setFooter(msg.author.username+'#'+msg.author.discriminator, msg.member.user.displayAvatarURL())
             );
             return;
         }
