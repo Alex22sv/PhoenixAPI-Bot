@@ -123,7 +123,7 @@ module.exports = {
                         const MissingPermissionsEmbed = new Discord.MessageEmbed()
                             .setTitle('Error!')
                             .setDescription('You need the permission `Administrator` to use that command.')
-                            .setColor(errorEmbed)
+                            .setColor(errorColor)
                         msg.channel.send(MissingPermissionsEmbed)
                         console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
                     }

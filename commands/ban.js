@@ -19,7 +19,6 @@ module.exports = {
                 .setDescription('Your message does not include an exaroton server.')
                 .setColor(errorColor)
             msg.channel.send(notSeverMentioned)
-            console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
             return
         }
         if(args[0] != undefined){
@@ -30,7 +29,6 @@ module.exports = {
                         .setDescription('Your message does not include the {Minecraft player} parameter. \n Use `'+prefix+'help ban` for more information.')
                         .setColor(errorColor)
                     msg.channel.send(missingPlayerEmbed)
-                    console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
                     return
                 } else{
                     async function APIBan(){  
@@ -71,9 +69,8 @@ module.exports = {
                 const MissingPermissionsEmbed = new Discord.MessageEmbed()
                     .setTitle('Error!')
                     .setDescription('You need the permission `Administrator` to use that command.')
-                    .setColor(errorEmbed)
+                    .setColor(errorColor)
                 msg.channel.send(MissingPermissionsEmbed)
-                console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
             }
         }
     }

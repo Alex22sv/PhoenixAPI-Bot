@@ -18,7 +18,6 @@ module.exports = {
                 .setTitle('Error!')
                 .setDescription('Your message does not include an exaroton server.')
                 .setColor(errorColor)
-            console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
             msg.channel.send(notSeverMentioned)
             return
         }
@@ -34,7 +33,6 @@ module.exports = {
                             .setDescription('Your message does not include the {player list} parameter. \nUse `'+prefix+'help list` for more information.')
                             .setColor(errorColor)
                         msg.channel.send(notPlayerList)
-                        console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
                         return
                     }
                     if(args[1].toLowerCase() == 'banned'){
@@ -47,7 +45,6 @@ module.exports = {
                                 .setColor(embedColor)
                                 .setFooter(msg.author.username+'#'+msg.author.discriminator, msg.member.user.displayAvatarURL())
                             msg.channel.send(listBannedEmbed);
-                            console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
                             return
                         } catch (e) {
                             console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
@@ -77,7 +74,6 @@ module.exports = {
                                 .setColor(embedColor)
                                 .setFooter(msg.author.username+'#'+msg.author.discriminator, msg.member.user.displayAvatarURL())
                             msg.channel.send(listOpsEmbed);
-                            console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
                             return
                         } catch (e) {
                             console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
@@ -106,14 +102,12 @@ module.exports = {
                                     .setColor(embedColor)
                                     .setFooter(msg.author.username+'#'+msg.author.discriminator, msg.member.user.displayAvatarURL())
                                 msg.channel.send(embedPlayers)
-                                console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
                             }
                             if(server.players.count == 0){
                                 const embedNoPlayers = new Discord.MessageEmbed() 
                                     .setDescription(`There are no players playing in server **${server.name}**.`)
                                     .setColor(embedColor)
                                 msg.channel.send(embedNoPlayers)
-                                console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
                             }
                         } catch (e){
                             console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
@@ -124,9 +118,7 @@ module.exports = {
                                     .setDescription(`Server "${args[0]}" not found.`)
                                     .setColor(errorColor)
                                 msg.channel.send(serverNotFoundEmbed) 
-                            }  
-
-                            else{
+                            } else{
                                 const errorEmbed = new Discord.MessageEmbed()
                                     .setTitle('Error!')
                                     .setDescription('An error occurred while running that command: `' + e.message + '`')
@@ -145,7 +137,6 @@ module.exports = {
                                 .setColor(embedColor)
                                 .setFooter(msg.author.username+'#'+msg.author.discriminator, msg.member.user.displayAvatarURL())
                             msg.channel.send(listWhitelistedEmbed);
-                            console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
                             return
                         } catch (e) {
                             console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
@@ -156,9 +147,7 @@ module.exports = {
                                     .setDescription(`Server "${args[0]}" not found.`)
                                     .setColor(errorColor)
                                 msg.channel.send(serverNotFoundEmbed)
-                            }
-
-                            else{
+                            } else{
                                 const errorEmbed = new Discord.MessageEmbed()
                                     .setTitle('Error!')
                                     .setDescription('An error occurred while running that command: `' + e.message + '`')
@@ -172,7 +161,6 @@ module.exports = {
                             .setDescription('"'+args[1]+'" is not a valid player list. \nUse `'+prefix+ 'help list` for more information.')
                             .setColor(errorColor)
                         msg.channel.send(PlayerlistNotFound)
-                        console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
                         return
                     }
                 }
@@ -182,9 +170,8 @@ module.exports = {
                 const MissingPermissionsEmbed = new Discord.MessageEmbed()
                     .setTitle('Error!')
                     .setDescription('You need the permission `Administrator` to use that command.')
-                    .setColor(errorEmbed)
+                    .setColor(errorColor)
                 msg.channel.send(MissingPermissionsEmbed)
-                console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
             }
         }
 

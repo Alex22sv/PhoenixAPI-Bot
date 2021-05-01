@@ -14,7 +14,6 @@ module.exports = {
                 .setDescription(Object.keys(bot.commands).map(command => '`'+command+'`').join(', '))
                 .setTimestamp()
                 .setFooter(msg.author.username+'#'+msg.author.discriminator, msg.member.user.displayAvatarURL());
-            console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator);
             await msg.channel.send(helpEmbed);
             return;
         }
@@ -39,8 +38,6 @@ module.exports = {
             .addField('Required permission', command.permission)
             .setTimestamp()
             .setFooter(msg.author.username+'#'+msg.author.discriminator, msg.member.user.displayAvatarURL());
-        console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator);
-
         await msg.channel.send(commandHelpEmbed);
     }
 }

@@ -19,7 +19,6 @@ module.exports = {
                 .setDescription('Your message does not include an exaroton server.')
                 .setColor(errorColor)
             msg.channel.send(notSeverMentioned)
-            console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
             return
         }
         if(args[0] != undefined) {
@@ -35,7 +34,6 @@ module.exports = {
                             .setDescription("I can't get the DynIP of that server because it's not online.")
                             .setColor(errorColor)
                         msg.channel.send(errorDynipEmbed)
-                        console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
                     }
                     if(server.host != null){
                         const DynipEmbed = new Discord.MessageEmbed()
@@ -43,7 +41,6 @@ module.exports = {
                             .setColor(embedColor)
                             .setFooter(msg.author.username+'#'+msg.author.discriminator, msg.member.user.displayAvatarURL())
                         msg.channel.send(DynipEmbed)
-                        console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
                     }
                 }catch (e) {
                     console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)

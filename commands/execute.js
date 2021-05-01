@@ -20,7 +20,6 @@ module.exports = {
                 .setDescription('Your message does not include an exaroton server.')
                 .setColor(errorColor)
             msg.channel.send(notSeverMentioned)
-            console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
             return
             }
     
@@ -31,7 +30,6 @@ module.exports = {
                         .setDescription('Your message does not include the {command} parameter. \n Use `'+prefix+'help execute` for more information.')
                         .setColor(errorColor)
                     msg.channel.send(notCommandEmbed)
-                    console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
                     return
                 } else {
                     async function APIExecute() {
@@ -46,7 +44,6 @@ module.exports = {
                                 .setDescription('Commands executed successfully.')
                                 .setColor(embedColor)
                             msg.channel.send(executeEmbed)
-                            console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
                         } catch (e) {
                             console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
                             console.error('An error occurred while using "execute" command: '+ e.message);
@@ -82,9 +79,8 @@ module.exports = {
             const MissingPermissionsEmbed = new Discord.MessageEmbed()
                 .setTitle('Error!')
                 .setDescription('You need the permission `Administrator` to use that command.')
-                .setColor(errorEmbed)
+                .setColor(errorColor)
             msg.channel.send(MissingPermissionsEmbed)
-            console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
         }
     }
 }

@@ -20,10 +20,8 @@ module.exports = {
                     .setDescription('Your message does not include an exaroton server.')
                     .setColor(errorColor)
                 msg.channel.send(notSeverMentioned)
-                console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
                 return
             }
-
             if(args[0] != undefined){
                 async function APIlog() {
                     let name = args[0];
@@ -35,10 +33,7 @@ module.exports = {
                             .setDescription(`Log for server **${server.name}**: ${logs}`)
                             .setColor(embedColor)
                         msg.channel.send(logsEmbed)
-                        console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
-                    }
-
-                    catch (e) {
+                    } catch (e) {
                         console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
                         console.error('An error occurred while using "log" command: '+ e.message);
                         if(e.message == "Required POST argument 'content' is empty.") {
@@ -48,16 +43,13 @@ module.exports = {
                                 .setColor(errorColor)
                             msg.channel.send(emptyLogEmbed)
                         }
-
                         else if(e.message == "Cannot read property 'shareLogs' of undefined") {
                             const serverNotFoundEmbed = new Discord.MessageEmbed()
                                 .setTitle('Error!')
                                 .setDescription(`Server ${args[0]} not found.`)
                                 .setColor(errorColor)
                             msg.channel.send(serverNotFoundEmbed)
-                        }
-
-                        else {
+                        } else {
                             const errorEmbed = new Discord.MessageEmbed()
                                 .setTitle('Error!')
                                 .setDescription('An error occurred while running that command: `' + e.message + '`')
@@ -73,9 +65,8 @@ module.exports = {
             const MissingPermissionsEmbed = new Discord.MessageEmbed()
                 .setTitle('Error!')
                 .setDescription('You need the permission `Administrator` to use that command.')
-                .setColor(errorEmbed)
+                .setColor(errorColor)
             msg.channel.send(MissingPermissionsEmbed)
-            console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
         }
     }
 }

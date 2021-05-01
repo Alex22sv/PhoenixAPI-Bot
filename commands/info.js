@@ -9,7 +9,7 @@ module.exports = {
     description: 'Get information about the bot.',
     usage: '`'+prefix+'info`',
     permission: '`None`',
-    execute( msg){
+    execute(msg){
         try{
             const infoEmbed = new Discord.MessageEmbed()
             .setTitle('PhoenixAPI#4772')

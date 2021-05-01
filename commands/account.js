@@ -25,7 +25,6 @@ module.exports = {
                     .setDescription(`The exaroton account ${account.name} is ${embedDescription} and currently has ${account.credits} credits.`)
                     .setColor(embedColor)
                     .setFooter(msg.author.username+'#'+msg.author.discriminator, msg.member.user.displayAvatarURL())
-                console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
                 msg.channel.send(accountEmbed)
             }
             catch (e){

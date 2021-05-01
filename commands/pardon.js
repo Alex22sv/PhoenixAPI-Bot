@@ -19,7 +19,6 @@ module.exports = {
                     .setTitle('Error!')
                     .setDescription('Your message does not include an exaroton server.')
                     .setColor(errorColor)
-                console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
                 msg.channel.send(notSeverMentioned)
                 return
             }
@@ -30,7 +29,6 @@ module.exports = {
                         .setDescription('Your message does not include the {Minecraft player} parameter. \n Use `'+prefix+'help deop` for more information.')
                         .setColor(errorColor)
                     msg.channel.send(missingPlayerEmbed)
-                    console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
                     return
                 } else{
                     async function APIdeop(){  
@@ -72,9 +70,8 @@ module.exports = {
             const MissingPermissionsEmbed = new Discord.MessageEmbed()
                 .setTitle('Error!')
                 .setDescription('You need the permission `Administrator` to use that command.')
-                .setColor(errorEmbed)
+                .setColor(errorColor)
             msg.channel.send(MissingPermissionsEmbed)
-            console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
         }
     }
 }

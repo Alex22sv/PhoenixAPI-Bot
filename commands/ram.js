@@ -19,7 +19,6 @@ module.exports = {
                 .setDescription('Your message does not include an exaroton server.')
                 .setColor(errorColor)
             msg.channel.send(notSeverMentioned)
-            console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
             return
         }
 
@@ -35,10 +34,8 @@ module.exports = {
                             .setDescription('Your message does not include the {get/set} parameter. \nUse `'+prefix+'help ram` for more information.')
                             .setColor(errorColor)
                         msg.channel.send(errorRAMembed)
-                        console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
                         return
                     }
-
                     if(args[1].toLowerCase() == 'get'){
                         try {
                             let serverRAM = await server.getRAM();
@@ -47,7 +44,6 @@ module.exports = {
                                 .setColor(embedColor)
                                 .setFooter(msg.author.username+'#'+msg.author.discriminator, msg.member.user.displayAvatarURL())
                             msg.channel.send(serverRAMembed);
-                            console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
                         } catch (e) {
                             console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
                             console.error('An error occurred while using "ram" command: '+ e.message);
@@ -64,18 +60,14 @@ module.exports = {
                                     .setColor(errorColor)
                                 msg.channel.send(errorEmbed)
                             }
-                        } 
-                        
-                    }
-
-                    else if(args[1].toLowerCase() == 'set'){
+                        }
+                    } else if(args[1].toLowerCase() == 'set'){
                         if(args[2] == undefined){
                             const notRAMdefined = new Discord.MessageEmbed()
                                 .setTitle('Error!')
                                 .setDescription('Your message does not include the "RAM" parameter. \nUse `'+prefix+'help ram` for more information.')
                                 .setColor(errorColor)
                             msg.channel.send(notRAMdefined)
-                            console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
                             return
                         } else{
                             try {
@@ -112,27 +104,23 @@ module.exports = {
                                 }
                             }
                         }
-                    }
-                    else{
+                    } else{
                         const optionNotFound = new Discord.MessageEmbed()
                             .setTitle('Error!')
                             .setDescription('"'+args[1]+'" is not a valid option about RAM. \nUse `'+prefix+ 'help ram` for more information.')
                             .setColor(errorColor)
                         msg.channel.send(optionNotFound)
-                        console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
                         return
                     }
                 }
                 APIram();
             }
-
             if(!msg.member.hasPermission('ADMINISTRATOR'))  {
                 const MissingPermissionsEmbed = new Discord.MessageEmbed()
                     .setTitle('Error!')
                     .setDescription('You need the permission `Administrator` to use that command.')
-                    .setColor(errorEmbed)
+                    .setColor(errorColor)
                 msg.channel.send(MissingPermissionsEmbed)
-                console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
             }
         }
     }
