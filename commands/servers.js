@@ -28,7 +28,6 @@ module.exports = {
                 try{
                     for(let server of servers) {
                         msg.channel.send('Sever address: `' + server.address + '`| Server ID: `' + server.id + '`')
-                        console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
                     }
                 } catch (e) {
                     console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)

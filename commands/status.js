@@ -78,7 +78,7 @@ module.exports = {
                 colorEmbed = '#678188'
             } else if (server.hasStatus(server.STATUS.CRASHED)) {
                 currentStatus = 'Crashed'
-                colorEmbed = '#de0707'
+                colorEmbed = '#f91c1c'
             } else if (server.hasStatus(server.STATUS.STOPPING)){
                 currentStatus = 'Stopping...'
                 colorEmbed = '#678188'
@@ -87,11 +87,15 @@ module.exports = {
                 colorEmbed = '#678188'
             } else if(server.hasStatus(server.STATUS.OFFLINE)) {
                 currentStatus = 'Offline'
-                colorEmbed = '#de0707'
+                colorEmbed = '#f91c1c'
             }
+            let motd = server.motd;
+            motd = motd.replace(/\\u[\da-f]{4}/gi, c => String.fromCodePoint(parseInt(c.substr(2), 16)));
+            motd = motd.replace(/\n/g, '').replace('\\n', '\n');
+            motd = motd.replace(/§[\da-gk-or]/g, '');
             return new Discord.MessageEmbed()
                 .setTitle(server.address)
-                .setDescription(server.motd)
+                .setDescription(motd)
                 .setColor(colorEmbed)
                 .addFields(
                     {name:'Current Status', value:currentStatus, inline:true},
