@@ -19,7 +19,6 @@ module.exports = {
                     .setTitle('Error!')
                     .setDescription('Your message does not include an exaroton server.')
                     .setColor(errorColor)
-                console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
                 msg.channel.send(notSeverMentioned)
                 return
             } else{
@@ -29,13 +28,14 @@ module.exports = {
                     let server = serverLists.find(server => server.name === name);
                     try {
                         await server.executeCommand('say [exaroton API] This server will be stopped in a few seconds.');
+                        let url = await server.shareLogs();
                         await server.stop();
                         const serverStoppingEmbed = new Discord.MessageEmbed()
-                            .setDescription(`Stopping server **${server.name}**`)
+                            .setDescription(`Stopping server **${server.name}**\NServer log: `+url)
                             .setColor(embedColor)
                             .setFooter(msg.author.username+'#'+msg.author.discriminator, msg.member.user.displayAvatarURL())
                         msg.channel.send(serverStoppingEmbed)
-                        console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
+                        console.log(msg.author.username+'#'+msg.author.discriminator+' just stopped server '+server.name)
                     } catch (e) {
                         console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
                         console.error('An error occurred while using "stop" command: ' + e.message);
@@ -59,7 +59,6 @@ module.exports = {
                                 .setColor(errorColor)
                             msg.channel.send(errorEmbed)
                         }
-                        
                     }
                 }
                 APIstop();

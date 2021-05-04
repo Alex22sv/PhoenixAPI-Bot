@@ -20,7 +20,6 @@ module.exports = {
                     .setDescription('Your message does not include an exaroton server.')
                     .setColor(errorColor)
                 msg.channel.send(notSeverMentioned)
-                console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
                 return
             } else{
                 async function APIRestart() {
@@ -29,12 +28,14 @@ module.exports = {
                     let server = serverLists.find(server => server.name === name);
                     try {
                         await server.executeCommand('say [exaroton API] This server will be restarted in a few seconds.');
+                        let url = await server.shareLogs();
                         await server.restart();
                         const serverRestartingEmbed = new Discord.MessageEmbed()
-                            .setDescription(`Restarting server **${server.name}**`)
+                            .setDescription(`Restarting server **${server.name}**\nServer log: `+url)
                             .setColor(embedColor)
                             .setFooter(msg.author.username+'#'+msg.author.discriminator, msg.member.user.displayAvatarURL())
                         msg.channel.send(serverRestartingEmbed)
+                        console.log(msg.author.username+'#'+msg.author.discriminator+' just restarted server '+server.name)
                     } catch (e) {
                         console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
                         console.error('An error occurred while using "restart" command: ' + e.message);

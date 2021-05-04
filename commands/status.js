@@ -18,7 +18,6 @@ module.exports = {
                 .setTitle('Error!')
                 .setDescription('Your message does not include an exaroton server.')
                 .setColor(errorColor)
-            console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
             msg.channel.send(notSeverMentioned)
             return
         }
@@ -31,7 +30,6 @@ module.exports = {
                     await server.get();
                     const statusEmbed = generateEmbed(server)
                     let embedMsg = await msg.channel.send(statusEmbed)
-                    console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
                     msg.delete()
                     server.subscribe()
                     server.on('status', function(server) { embedMsg.edit(generateEmbed(server)); });
@@ -45,8 +43,7 @@ module.exports = {
                             .setDescription(`Server "${args[0]}" not found.`)
                             .setColor(errorColor)
                         msg.channel.send(serverNotFoundEmbed)
-                    }
-                    else{ 
+                    } else{ 
                         const errorEmbed = new Discord.MessageEmbed()
                             .setTitle('Error!')
                             .setDescription('An error occurred while running that command: `' + e.message + '`')

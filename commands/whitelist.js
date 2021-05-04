@@ -18,7 +18,6 @@ module.exports = {
                 .setTitle('Error!')
                 .setDescription('Your message does not include an exaroton server.')
                 .setColor(errorColor)
-            console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
             msg.channel.send(notSeverMentioned)
             return
         }
@@ -28,7 +27,6 @@ module.exports = {
                         .setTitle('Error!')
                         .setDescription('Your message does not include the {add/remove} parameter. \n Use `'+prefix+'help whitelist` for more information.')
                         .setColor(errorColor)
-                    console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
                     msg.channel.send(notOptionMentioned)
                     return
                     }
@@ -38,7 +36,6 @@ module.exports = {
                             .setTitle('Error!')
                             .setDescription('Your message does not include the "Minecraft player" parameter. \n Use `'+prefix+'help whitelist` for more information.')
                             .setColor(errorColor)
-                        console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
                         msg.channel.send(missingPlayerEmbed)
                     }else{
                         async function APIWhitelistAdd(){
@@ -82,7 +79,6 @@ module.exports = {
                                 .setTitle('Error!')
                                 .setDescription('Your message does not include the "Minecraft player" parameter. \n Use `'+prefix+'help whitelist` for more information.')
                                 .setColor(errorColor)
-                            console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
                             msg.channel.send(missingPlayerEmbed)
                         } else{
                             async function APIWhitelistRemove(){
@@ -125,7 +121,6 @@ module.exports = {
                             .setDescription('You need the permission `Administrator` to use that command.')
                             .setColor(errorColor)
                         msg.channel.send(MissingPermissionsEmbed)
-                        console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
                     }
                 } else{
                     const optionNotFound = new Discord.MessageEmbed()
