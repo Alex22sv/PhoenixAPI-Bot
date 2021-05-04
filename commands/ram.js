@@ -25,9 +25,6 @@ module.exports = {
         if(args[0] != undefined){
             if(msg.member.hasPermission('ADMINISTRATOR')){
                 async function APIram() {
-                    let name = args[0];
-                    let serverLists = await exarotonClient.getServers();
-                    let server = serverLists.find(server => server.name === name);
                     if(args[1] == undefined){
                         const errorRAMembed = new Discord.MessageEmbed()
                             .setTitle('Error!')
@@ -38,6 +35,9 @@ module.exports = {
                     }
                     if(args[1].toLowerCase() == 'get'){
                         try {
+                            let name = args[0];
+                            let serverLists = await exarotonClient.getServers();
+                            let server = serverLists.find(server => server.name === name);
                             let serverRAM = await server.getRAM();
                             const serverRAMembed = new Discord.MessageEmbed()
                                 .setDescription(`RAM for server **${server.name}**: ${serverRAM}GB`)
@@ -71,6 +71,9 @@ module.exports = {
                             return
                         } else{
                             try {
+                                let name = args[0];
+                            let serverLists = await exarotonClient.getServers();
+                            let server = serverLists.find(server => server.name === name);
                                 let serverRAM = await server.getRAM()
                                 await server.setRAM(args[2]);     
                                 const ramChangedEmbed = new Discord.MessageEmbed()

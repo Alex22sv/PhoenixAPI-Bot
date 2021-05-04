@@ -33,10 +33,10 @@ module.exports = {
                     return
                 } else {
                     async function APIExecute() {
-                        let name = args[0];
-                        let serverLists = await exarotonClient.getServers();
-                        let server = serverLists.find(server => server.name === name);
                         try {
+                            let name = args[0];
+                            let serverLists = await exarotonClient.getServers();
+                            let server = serverLists.find(server => server.name === name);
                             await server.executeCommand('say Executing commands through API...');
                             await server.executeCommand(args.slice(1).join(' '))
                             await server.executeCommand('save-all');

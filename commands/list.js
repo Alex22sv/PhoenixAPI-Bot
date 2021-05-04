@@ -24,9 +24,6 @@ module.exports = {
         if(args[0] != undefined){
             if(msg.member.hasPermission('ADMINISTRATOR')) {
                 async function APIlist(){
-                    let name = args[0];
-                    let serverLists = await exarotonClient.getServers();
-                    let server = serverLists.find(server => server.name === name);
                     if(args[1] == undefined){
                         const notPlayerList = new Discord.MessageEmbed()
                             .setTitle('Error!')
@@ -37,6 +34,9 @@ module.exports = {
                     }
                     if(args[1].toLowerCase() == 'banned'){
                         try {
+                            let name = args[0];
+                            let serverLists = await exarotonClient.getServers();
+                            let server = serverLists.find(server => server.name === name);
                             let listBanned = server.getPlayerList("banned-players");
                             let entriesBanned = await listBanned.getEntries();
                             const listBannedEmbed = new Discord.MessageEmbed()
@@ -66,6 +66,9 @@ module.exports = {
                     }
                     else if(args[1].toLowerCase() == 'ops') {
                         try {
+                            let name = args[0];
+                            let serverLists = await exarotonClient.getServers();
+                            let server = serverLists.find(server => server.name === name);
                             let listOps = server.getPlayerList("ops");
                             let entriesOps = await listOps.getEntries();
                             const listOpsEmbed = new Discord.MessageEmbed()
@@ -95,6 +98,9 @@ module.exports = {
                     }
                     else if(args[1].toLowerCase() == 'players') {
                         try{
+                            let name = args[0];
+                            let serverLists = await exarotonClient.getServers();
+                            let server = serverLists.find(server => server.name === name);
                             if(server.players.count != 0){ 
                                 const embedPlayers = new Discord.MessageEmbed()                            
                                     .setTitle('Online players in server: '+ server.name)
@@ -129,6 +135,9 @@ module.exports = {
                     }
                     else if(args[1].toLowerCase() == 'whitelist') {
                         try {
+                            let name = args[0];
+                            let serverLists = await exarotonClient.getServers();
+                            let server = serverLists.find(server => server.name === name);
                             let listWhitelist = server.getPlayerList("whitelist");
                             let entriesWhitelisted = await listWhitelist.getEntries();
                             const listWhitelistedEmbed = new Discord.MessageEmbed()

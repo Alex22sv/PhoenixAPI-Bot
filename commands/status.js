@@ -23,10 +23,10 @@ module.exports = {
         }
         if(args[0] != undefined){
             async function APIStatus(){
-                let name = args[0];
-                let serverLists = await exarotonClient.getServers();
-                let server = serverLists.find(server => server.name === name);
                 try{
+                    let name = args[0];
+                    let serverLists = await exarotonClient.getServers();
+                    let server = serverLists.find(server => server.name === name);
                     await server.get();
                     const statusEmbed = generateEmbed(server)
                     let embedMsg = await msg.channel.send(statusEmbed)

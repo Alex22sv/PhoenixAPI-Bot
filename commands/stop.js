@@ -23,10 +23,10 @@ module.exports = {
                 return
             } else{
                 async function APIstop() {
-                    let name = args[0];
-                    let serverLists = await exarotonClient.getServers();
-                    let server = serverLists.find(server => server.name === name);
                     try {
+                        let name = args[0];
+                        let serverLists = await exarotonClient.getServers();
+                        let server = serverLists.find(server => server.name === name);
                         await server.executeCommand('say [exaroton API] This server will be stopped in a few seconds.');
                         let url = await server.shareLogs();
                         await server.stop();

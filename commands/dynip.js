@@ -23,10 +23,10 @@ module.exports = {
         }
         if(args[0] != undefined) {
             async function APIDynIP() {
-                let name = args[0];
-                let serverLists = await exarotonClient.getServers();
-                let server = serverLists.find(server => server.name === name);
                 try {
+                    let name = args[0];
+                    let serverLists = await exarotonClient.getServers();
+                    let server = serverLists.find(server => server.name === name);
                     await server.get();
                     if(server.host == null){
                         const errorDynipEmbed = new Discord.MessageEmbed()

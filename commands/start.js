@@ -23,10 +23,10 @@ module.exports = {
                 return
             } else{
                 async function APIstart() {
-                    let name = args[0];
-                    let serverLists = await exarotonClient.getServers();
-                    let server = serverLists.find(server => server.name === name);
                     try {
+                        let name = args[0];
+                        let serverLists = await exarotonClient.getServers();
+                        let server = serverLists.find(server => server.name === name);
                         await server.start();
                         const serverStartingEmbed = new Discord.MessageEmbed()
                             .setDescription(`Starting server **${server.name}**`)

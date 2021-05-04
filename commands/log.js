@@ -24,10 +24,10 @@ module.exports = {
             }
             if(args[0] != undefined){
                 async function APIlog() {
-                    let name = args[0];
-                    let serverLists = await exarotonClient.getServers();
-                    let server = serverLists.find(server => server.name === name);
-                    try {
+                    try{
+                        let name = args[0];
+                        let serverLists = await exarotonClient.getServers();
+                        let server = serverLists.find(server => server.name === name);
                         let logs = await server.shareLogs();
                         const logsEmbed = new Discord.MessageEmbed()
                             .setDescription(`Log for server **${server.name}**: ${logs}`)

@@ -13,31 +13,29 @@ module.exports = {
     usage: '`'+prefix+'servers`',
     permission: '`None`',
     execute(msg) {
-        async function APIServers(){
-            let account = await exarotonClient.getAccount();
-            let servers = await exarotonClient.getServers();
-            if(servers.length == 0) {
-                const noServerFound = new Discord.MessageEmbed()
-                    .setTitle('Error!')
-                    .setDescription(`The exaroton account **${account.name}** has no servers.`)
-                    .setColor(errorColor)
-                msg.channel.send(noServerFound)
-                console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
-                return
-            } else{
-                try{
-                    for(let server of servers) {
-                        msg.channel.send('Sever address: `' + server.address + '`| Server ID: `' + server.id + '`')
-                    }
-                } catch (e) {
-                    console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
-                    console.error('An error occurred while using "servers" command: ' + e.message);
-                    const errorEmbed = new Discord.MessageEmbed()
+        async function APIServers(){ 
+            try{
+                let account = await exarotonClient.getAccount();
+                let servers = await exarotonClient.getServers();
+                if(servers.length == 0) {
+                    const noServerFound = new Discord.MessageEmbed()
                         .setTitle('Error!')
-                        .setDescription('An error occurred while running that command: `' + e.message + '`')
+                        .setDescription(`The exaroton account **${account.name}** has no servers.`)
                         .setColor(errorColor)
-                    msg.channel.send(errorEmbed)    
+                    msg.channel.send(noServerFound)
+                    console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
+                    return
+                } else{
+                        for(let server of servers){msg.channel.send('Sever address: `' + server.address + '`| Server ID: `' + server.id + '`')}
                 }
+            } catch (e){
+                console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
+                        console.error('An error occurred while using "servers" command: ' + e.message);
+                        const errorEmbed = new Discord.MessageEmbed()
+                            .setTitle('Error!')
+                            .setDescription('An error occurred while running that command: `' + e.message + '`')
+                            .setColor(errorColor)
+                        msg.channel.send(errorEmbed) 
             }
         }
         APIServers();
