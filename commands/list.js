@@ -10,7 +10,7 @@ const exarotonClient = new Client(config.exarotonAPIkey);
 module.exports = {
     name: 'list',
     description: 'Get player list contents.',
-    usage:'`'+prefix+'list {server name} {banned/op/players/whitelist}`',
+    usage:'`'+prefix+'list {server name} {banned/ops/players/whitelist}`',
     permission: '`ADMINISTRATOR`',
     execute(msg, args){
         if(args[0] == undefined){
@@ -52,7 +52,7 @@ module.exports = {
                             if(e.message == "Cannot read property 'getPlayerList' of undefined") {
                                 const serverNotFoundEmbed = new Discord.MessageEmbed()
                                     .setTitle('Error!')
-                                    .setDescription('Server not found.')
+                                    .setDescription(`Server "${args[0]}" not found.`)
                                     .setColor(errorColor)
                                 msg.channel.send(serverNotFoundEmbed)
                             } else{

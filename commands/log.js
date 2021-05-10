@@ -46,7 +46,7 @@ module.exports = {
                         else if(e.message == "Cannot read property 'shareLogs' of undefined") {
                             const serverNotFoundEmbed = new Discord.MessageEmbed()
                                 .setTitle('Error!')
-                                .setDescription(`Server ${args[0]} not found.`)
+                                .setDescription(`Server "${args[0]}" not found.`)
                                 .setColor(errorColor)
                             msg.channel.send(serverNotFoundEmbed)
                         } else {
