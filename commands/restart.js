@@ -31,7 +31,7 @@ module.exports = {
                         let url = await server.shareLogs();
                         await server.restart();
                         const serverRestartingEmbed = new Discord.MessageEmbed()
-                            .setDescription(`Restarting server **${server.name}**\nServer log: `+url)
+                            .setDescription(`Restarting server **${server.name}** \nServer log: `+url)
                             .setColor(embedColor)
                             .setFooter(msg.author.username+'#'+msg.author.discriminator, msg.member.user.displayAvatarURL())
                         msg.channel.send(serverRestartingEmbed)

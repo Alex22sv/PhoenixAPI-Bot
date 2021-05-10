@@ -31,7 +31,7 @@ module.exports = {
                         let url = await server.shareLogs();
                         await server.stop();
                         const serverStoppingEmbed = new Discord.MessageEmbed()
-                            .setDescription(`Stopping server **${server.name}**\NServer log: `+url)
+                            .setDescription(`Stopping server **${server.name}** \nServer log: `+url)
                             .setColor(embedColor)
                             .setFooter(msg.author.username+'#'+msg.author.discriminator, msg.member.user.displayAvatarURL())
                         msg.channel.send(serverStoppingEmbed)
