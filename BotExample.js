@@ -38,6 +38,5 @@ bot.on('message', async (msg) => {
 
 
 
- 
-bot.login(config.DiscordAPItoken)
 
+bot.login(config.DiscordAPItoken)

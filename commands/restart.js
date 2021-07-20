@@ -10,7 +10,7 @@ const exarotonClient = new Client(config.exarotonAPIkey);
 module.exports = {
     name: 'restart',
     description: 'Restart a Minecraft server.',
-    usage: '`'+prefix+'restart {server name}`',
+    usage: '`'+prefix+'restart {server name|ID|address}`',
     permission: '`ADMINISTRATOR`',
     execute(msg, args){
         if(msg.member.hasPermission('ADMINISTRATOR')){
@@ -26,7 +26,7 @@ module.exports = {
                     try {
                         let name = args[0];
                         let serverLists = await exarotonClient.getServers();
-                        let server = serverLists.find(server => server.name === name);
+                        let server = serverLists.find(server => server.name === name || server.id === name || server.address === name);
                         await server.executeCommand('say [exaroton API] This server will be restarted in a few seconds.');
                         let url = await server.shareLogs();
                         await server.restart();

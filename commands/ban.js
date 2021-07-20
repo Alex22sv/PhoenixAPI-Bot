@@ -10,7 +10,7 @@ const exarotonClient = new Client(config.exarotonAPIkey);
 module.exports = {
     name: 'ban',
     description: 'Ban players in Minecraft servers.',
-    usage: '`'+prefix+'ban {server name} {Minecraft player}`',
+    usage: '`'+prefix+'ban {server name|ID|address} {Minecraft player}`',
     permission: '`ADMINISTRATOR`',
     execute(msg, args){
         if(args[0] == undefined){
@@ -35,7 +35,7 @@ module.exports = {
                         try {
                             let name = args[0];
                             let serverLists = await exarotonClient.getServers();
-                            let server = serverLists.find(server => server.name === name);
+                            let server = serverLists.find(server => server.name === name || server.id === name || server.address === name);
                             let username  = args[1]
                             let list = server.getPlayerList("banned-players")
                             await list.addEntry(username)

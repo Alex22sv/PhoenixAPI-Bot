@@ -10,7 +10,7 @@ const exarotonClient = new Client(config.exarotonAPIkey);
 module.exports = {
     name: 'start',
     description: 'Start a Minecraft server.',
-    usage: '`'+prefix+'start {server name}`',
+    usage: '`'+prefix+'start {server name|ID|address}`',
     permission: '`ADMINISTRATOR`',
     execute(msg, args){
         if(msg.member.hasPermission('ADMINISTRATOR')){
@@ -26,7 +26,7 @@ module.exports = {
                     try {
                         let name = args[0];
                         let serverLists = await exarotonClient.getServers();
-                        let server = serverLists.find(server => server.name === name);
+                        let server = serverLists.find(server => server.name === name || server.id === name || server.address === name);
                         await server.start();
                         const serverStartingEmbed = new Discord.MessageEmbed()
                             .setDescription(`Starting server **${server.name}**`)

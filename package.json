@@ -1,10 +1,10 @@
 {
   "name": "phoenixapi-bot",
-  "version": "4.1.0",
-  "description": "Discord Bot developed with Discord.js and the exaroton API. The main objective of this bot is the managment of exaroton servers.",
+  "version": "4.2.0",
+  "description": "Discord Bot developed with Discord.js and the exaroton API. The main reason of this bot is the managment of exaroton servers.",
   "main": "BotExample.js",
   "dependencies": {
-    "discord.js": "^12.5.1",
+    "discord.js": "^12.5.3",
     "exaroton": "^1.6.1"
   },
   "devDependencies": {},

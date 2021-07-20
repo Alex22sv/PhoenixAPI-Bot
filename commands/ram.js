@@ -10,7 +10,7 @@ const exarotonClient = new Client(config.exarotonAPIkey);
 module.exports = {
     name: 'ram',
     description: 'Get/Change the server RAM.', 
-    usage: 'Get RAM: `'+prefix+'ram {server name} get` \nChange RAM: `'+prefix+'ram {server name} set {2-16}`',
+    usage: 'Get RAM: `'+prefix+'ram {server name|ID|address} get` \nChange RAM: `'+prefix+'ram {server name|ID|address} set {2-16}`',
     permission: '`ADMINISTRATOR`',
     execute(msg, args){
         if(args[0] == undefined){
@@ -37,7 +37,7 @@ module.exports = {
                         try {
                             let name = args[0];
                             let serverLists = await exarotonClient.getServers();
-                            let server = serverLists.find(server => server.name === name);
+                            let server = serverLists.find(server => server.name === name || server.id === name || server.address === name);
                             let serverRAM = await server.getRAM();
                             const serverRAMembed = new Discord.MessageEmbed()
                                 .setDescription(`RAM for server **${server.name}**: ${serverRAM}GB`)
@@ -73,7 +73,7 @@ module.exports = {
                             try {
                                 let name = args[0];
                             let serverLists = await exarotonClient.getServers();
-                            let server = serverLists.find(server => server.name === name);
+                            let server = serverLists.find(server => server.name === name || server.id === name || server.address === name);
                                 let serverRAM = await server.getRAM()
                                 await server.setRAM(args[2]);     
                                 const ramChangedEmbed = new Discord.MessageEmbed()

@@ -10,7 +10,7 @@ const exarotonClient = new Client(config.exarotonAPIkey);
 module.exports = {
     name: 'status',
     description: 'Create an embed to show the status for a server.',
-    usage: '`'+prefix+'status {server name}`',
+    usage: '`'+prefix+'status {server name|ID|address}`',
     permission: '`None`',
     execute(msg, args){
         if(args[0] == undefined){
@@ -26,7 +26,7 @@ module.exports = {
                 try{
                     let name = args[0];
                     let serverLists = await exarotonClient.getServers();
-                    let server = serverLists.find(server => server.name === name);
+                    let server = serverLists.find(server => server.name === name || server.id === name || server.address === name);
                     await server.get();
                     const statusEmbed = generateEmbed(server)
                     let embedMsg = await msg.channel.send(statusEmbed)

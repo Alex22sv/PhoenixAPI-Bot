@@ -10,7 +10,7 @@ const exarotonClient = new Client(config.exarotonAPIkey);
 module.exports = {
     name: 'log',
     description: 'Upload a server log to https://mclo.gs/.',
-    usage: '`'+prefix+'log {server name}`',
+    usage: '`'+prefix+'log {server name|ID|address}`',
     permission: '`ADMINISTRATOR`',
     execute(msg, args){
         if(msg.member.hasPermission('ADMINISTRATOR')){
@@ -27,7 +27,7 @@ module.exports = {
                     try{
                         let name = args[0];
                         let serverLists = await exarotonClient.getServers();
-                        let server = serverLists.find(server => server.name === name);
+                        let server = serverLists.find(server => server.name === name || server.id === name || server.address === name);
                         let logs = await server.shareLogs();
                         const logsEmbed = new Discord.MessageEmbed()
                             .setDescription(`Log for server **${server.name}**: ${logs}`)

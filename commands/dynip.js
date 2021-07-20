@@ -10,7 +10,7 @@ const exarotonClient = new Client(config.exarotonAPIkey);
 module.exports = {
     name: 'dynip',
     description: "Get the server's DynIP.",
-    usage: '`'+prefix+'dynip {server name}`',
+    usage: '`'+prefix+'dynip {server name|ID|address}`',
     permission: '`None`',
     execute(msg, args){
         if(args[0] == undefined) {
@@ -26,7 +26,7 @@ module.exports = {
                 try {
                     let name = args[0];
                     let serverLists = await exarotonClient.getServers();
-                    let server = serverLists.find(server => server.name === name);
+                    let server = serverLists.find(server => server.name === name || server.id === name || server.address === name);
                     await server.get();
                     if(server.host == null){
                         const errorDynipEmbed = new Discord.MessageEmbed()

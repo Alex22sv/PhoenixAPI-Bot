@@ -10,7 +10,7 @@ const exarotonClient = new Client(config.exarotonAPIkey);
 module.exports = {
     name: 'whitelist',
     description: 'Add Minecraft players to the whitelist or remove players from it.',
-    usage: '`'+prefix+'whitelist {server name} {add/remove} {Minecraft player}`',
+    usage: '`'+prefix+'whitelist {server name|ID|address} {add/remove} {Minecraft player}`',
     permission: 'Whitelist players: `None` \n Remove players from whitelist: `ADMINISTRATOR`',
     execute(msg, args){
         if(args[0] == undefined) {
@@ -42,7 +42,7 @@ module.exports = {
                             try {
                                 let name = args[0];
                                 let serverLists = await exarotonClient.getServers();
-                                let server = serverLists.find(server => server.name === name);
+                                let server = serverLists.find(server => server.name === name || server.id === name || server.address === name);
                                 let username  = args[2]
                                 let list = server.getPlayerList("whitelist")
                                 await list.addEntry(username)
