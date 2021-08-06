@@ -21,7 +21,7 @@ To get a full list of all available commands, use `API help`. You can also show 
 # Important
 * **Status command**
 
-    + Thanks to the [new update](https://github.com/exaroton/node-exaroton-api#websocket-api) you can now get your server status in real time by using `API status {server name}`, the bot will send an embed of the current status of that server and when an event happens (e.g. when someone joins the server or the status of the server changes, etc.) the bot will edit its embed with the new changes.
+    + Thanks to the [new update](https://github.com/exaroton/node-exaroton-api#websocket-api) you can now get your server status in real time by using `API status {server name|ID|address}`, the bot will send an embed of the current status of that server and when an event happens (e.g. when someone joins the server or the status of the server changes, etc.) the bot will edit its embed with the new changes.
     + Note: I recommend creating a separate channel for your server information and embed, in which members are not allowed to send messages. This way, your embed always remains visible and can easily be found by your players.
 
 * **Support**
