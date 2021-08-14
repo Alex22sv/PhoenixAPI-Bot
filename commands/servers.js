@@ -23,7 +23,6 @@ module.exports = {
                         .setDescription(`The exaroton account **${account.name}** has no servers.`)
                         .setColor(errorColor)
                     msg.channel.send(noServerFound)
-                    console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
                     return
                 } else{
                         for(let server of servers){msg.channel.send('Sever address: `' + server.address + '`| Server ID: `' + server.id + '`')}

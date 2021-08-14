@@ -36,7 +36,6 @@ bot.on('message', async (msg) => {
     await command.execute(msg, args, bot);
  });
 
-
-
-
+ 
 bot.login(config.DiscordAPItoken)
+
