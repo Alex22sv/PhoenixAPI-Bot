@@ -33,7 +33,7 @@ module.exports = {
         }
         
         const commandHelpEmbed = new Discord.MessageEmbed()
-            .setDescription(`**Help for command [${command.name.toUpperCase()}](https://github.com/Alex0622/PhoenixAPI-Bot/blob/main/commands/${command.name}.js)**`)
+            .setDescription(`**Help for command [${command.name.toUpperCase()}](https://github.com/Alex0622/PhoenixAPI-Bot/blob/main/EN/commands/${command.name}}.js)**`)
             .setColor(embedColor)
             .addField('Description', command.description)
             .addField('Usage', command.usage)
