@@ -1,0 +1,7 @@
+{
+    "prefix" : "API ",
+    "exarotonAPIkey" : "Inserta tu token de la API de exaroton aquí",
+    "DiscordAPItoken" : "Inserta tu token de la API de Discord aquí",
+    "embedColor" : "#19ba19",
+    "errorColor" : "#de0707"
+}

@@ -42,7 +42,7 @@ module.exports = {
                             try {
                                 let name = args[0];
                                 let serverLists = await exarotonClient.getServers();
-                                let server = serverLists.find(server => server.name === name || server.id === name || server.address === name);
+                                let server = serverLists.find(server => server.name === name || server.id === name || server.address === name)
                                 let username  = args[2]
                                 let list = server.getPlayerList("whitelist")
                                 await list.addEntry(username)

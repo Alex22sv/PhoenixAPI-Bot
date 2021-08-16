@@ -10,7 +10,7 @@ const exarotonClient = new Client(config.exarotonAPIkey);
 module.exports = {
     name: 'deop',
     description: 'Remove operators rights from players in Minecraft servers.',
-    usage: '`'+prefix+'deop {server name|ID|address} {Minecraft player}',
+    usage: '`'+prefix+'deop {server name|ID|address} {Minecraft player}`',
     permission: '`ADMINISTRATOR`',
     execute(msg, args){
         if(msg.member.hasPermission('ADMINISTRATOR')){

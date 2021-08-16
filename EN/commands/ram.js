@@ -72,8 +72,8 @@ module.exports = {
                         } else{
                             try {
                                 let name = args[0];
-                            let serverLists = await exarotonClient.getServers();
-                            let server = serverLists.find(server => server.name === name || server.id === name || server.address === name);
+                                let serverLists = await exarotonClient.getServers();
+                                let server = serverLists.find(server => server.name === name || server.id === name || server.address === name);
                                 let serverRAM = await server.getRAM()
                                 await server.setRAM(args[2]);     
                                 const ramChangedEmbed = new Discord.MessageEmbed()
@@ -81,7 +81,7 @@ module.exports = {
                                     .setColor(embedColor)   
                                     .setFooter(msg.author.username+'#'+msg.author.discriminator, msg.member.user.displayAvatarURL())                     
                                 msg.channel.send(ramChangedEmbed)
-                                console.log(msg.author.username+'#'+msg.author.discriminator + `has changed the server RAM of server "${args[0]}" from ${serverRAM}GB to ${args[2]}GB.`)
+                                console.log(msg.author.username+'#'+msg.author.discriminator + ` has changed the server RAM of server "${args[0]}" from ${serverRAM}GB to ${args[2]}GB.`)
                             } catch (e) {
                                 console.log(msg.content + ' | User: ' + msg.author.username+'#'+msg.author.discriminator)
                                 console.error('Error while using "ram" command: ' +e.message);
