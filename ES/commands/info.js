@@ -9,13 +9,13 @@ module.exports = {
     description: 'Obtén información acerca del bot.',
     usage: '`'+prefix+'info`',
     permission: '`Ninguno`',
-    execute(msg){
+    execute(bot, msg){
         try{
             const infoEmbed = new Discord.MessageEmbed()
             .setTitle('PhoenixAPI#4772')
             .setDescription('PhoenixAPI es un bot desarrollado con discord.js. El objetivo principal de este bot es la administración de servidores de [exaroton](https://exaroton.com/) usando la API de exaroton.')
             .setColor(embedColor)
-            .setThumbnail('https://cdn.discordapp.com/avatars/803840147862454272/e35c5457abef496e3d8c0780bbef6e5d.webp?size=1024')
+            .setThumbnail(bot.user.displayAvatarURL())
             .addFields(
                 {name:'Dueño', value:'`Alex22#7756`', inline:true},
                 {name:'Desarrollado desde', value: '`21/1/2021`', inline:true},

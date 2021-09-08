@@ -33,7 +33,7 @@ bot.on('message', async (msg) => {
     const command = bot.commands[commandName];
     if (!command) return;
   
-    await command.execute(msg, args, bot);
+    await command.execute(bot, msg, args);
  });
 
  
