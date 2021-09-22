@@ -1,41 +1,34 @@
-const Discord = require('discord.js');
-const config = require('./config.json');
-
-const bot = new Discord.Client();
-const prefix = config.prefix;
-
-
-
-bot.commands = {};
+const { Client, Intents } = require('discord.js');
+const Discord = require("discord.js")
+const config = require("./src/config.json");
 const fs = require('fs');
-/* read the commands directory and go through all files */
-for (const file of fs.readdirSync(`${__dirname}/commands`)) {
-   /* path to the current file */
-   const path = `${__dirname}/commands/${file}`;
-   /* exclude folders and files that arent javascript */
-   if(!file.endsWith('.js') || !fs.lstatSync(path).isFile()) continue;
-   const command = require(path);
-   bot.commands[command.name] = command;
+
+async function main(){
+	const bot = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES], allowedMentions: { parse: [] } });
+	bot.commands = {};
+	const prefix = config.prefix
+    for (const file of fs.readdirSync(`${__dirname}/src/commands`)) {
+        const path = `${__dirname}/src/commands/${file}`;
+        if(!file.endsWith('.js') || !fs.lstatSync(path).isFile()) continue;
+        const command = require(path);
+        bot.commands[command.name] = command;
+    }
+    bot.on('ready', () => {
+        bot.user.setPresence({ status: 'online', activities: [{ type: 'WATCHING', name: 'servidores de exaroton'}]})
+        console.log('Bot activado')
+    	console.log('El bot está en: '+ bot.guilds.cache.size +' servidores')
+	});
+	bot.on("messageCreate", msg => {
+		if(!msg.content.startsWith(prefix) || msg.author.bot) return;
+		const args = msg.content.slice(prefix.length).split(" ");
+    	const commandName = args.shift().toLowerCase();
+		const command = bot.commands[commandName];
+		if(!command) return
+		command.execute(bot, msg, args)
+	});
+	bot.login(config.DiscordAPItoken)
 }
-
-bot.on('ready', () => {
-    console.log('Bot en línea')
-    console.log('Servidores de Discord: '+ bot.guilds.cache.size)
-    bot.user.setActivity('servidores de exaroton', {type: 'WATCHING'})
-});
-
-bot.on('message', async (msg) => {
-    if (!msg.content.startsWith(prefix)) return;
-
-    const args = msg.content.slice(prefix.length).split(" ");
-    const commandName = args.shift().toLowerCase();
-
-    const command = bot.commands[commandName];
-    if (!command) return;
-  
-    await command.execute(bot, msg, args);
- });
-
- 
-bot.login(config.DiscordAPItoken)
-
+main().catch(e => {
+    console.error(e);
+    process.exit(1);
+})
