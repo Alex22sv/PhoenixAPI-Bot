@@ -9,7 +9,7 @@ module.exports = {
     name: 'dynip',
     description: "Obtén la DynIP (IP dinámica) del servidor.",
     usage: '`'+prefix+'dynip {nombre|ID|dirección del servidor}`',
-    permission: '`None`',
+    permission: '`Ninguno`',
     execute(bot, msg, args){
         async function APIdynip(){
             try{
