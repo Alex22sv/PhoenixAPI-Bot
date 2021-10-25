@@ -4,13 +4,14 @@ You can find the documentation about the exaroton API [here](https://support.exa
  
 # Using the bot
 Requirements: [Node.js](https://nodejs.org/en/download/), [discord.js](https://discord.js.org/) & [exaroton API](https://www.npmjs.com/package/exaroton)
+Check out our Spanish tutorial [here](https://www.youtube.com/watch?v=lYosqjZpIBE).
 Follow the instructions to install your Discord bot:
 1. Download the code and run `npm install`.
 2. Create a [Discord application](https://discord.com/developers/applications/).
 3. Add a bot to the application and copy the Token.
 4. Go to your [exaroton settings](https://exaroton.com/account/) and copy your API token.
 5. Open the config.json file and add your exaroton API token and your Discord API token.
-6. Start the BotExample.js file.
+6. Start the main.js file.
 7. To invite the bot to your Guild use [this link](https://discord.com/oauth2/authorize?client_id=ID&scope=bot&permissions=75776) and replace the 'ID' with the client ID of your application.
 
 # Commands
