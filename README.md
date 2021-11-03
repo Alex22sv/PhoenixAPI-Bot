@@ -1,6 +1,6 @@
 # PhoenixAPI-Bot
 PhoenixAPI is a bot developed with discord.js. The main reason of this bot is the managment of [exaroton](https://exaroton.com/) servers using the exaroton API.
-You can find the documentation about the exaroton API [here](https://support.exaroton.com/hc/en-us/articles/360019857878-API-documentation) and its package [here](https://www.npmjs.com/package/exaroton).
+You can find the documentation about the exaroton API [here](https://support.exaroton.com/hc/en-us/articles/360019857878-API-documentation) and its package [here](https://developers.exaroton.com/).
  
 # Using the bot
 Requirements: [Node.js](https://nodejs.org/en/download/), [discord.js](https://discord.js.org/) & [exaroton API](https://www.npmjs.com/package/exaroton)
@@ -22,8 +22,12 @@ To get a full list of all available commands, use `API help`. You can also show 
 # Important
 * **Status command**
 
-    + Thanks to the [new update](https://github.com/exaroton/node-exaroton-api#websocket-api) you can now get your server status in real time by using `API status {server name|ID|address}`, the bot will send an embed of the current status of that server and when an event happens (e.g. when someone joins the server or the status of the server changes, etc.) the bot will edit its embed with the new changes.
+    + Thanks to the [new update](https://developers.exaroton.com/#header-websocket-api) you can now get your server status in real time by using `API status {server name|ID|address}`, the bot will send an embed of the current status of that server and when an event happens (e.g. when someone joins the server or the status of the server changes, etc.) the bot will edit its embed with the new changes.
     + Note: I recommend creating a separate channel for your server information and embed, in which members are not allowed to send messages. This way, your embed always remains visible and can easily be found by your players.
+* **PhoenixAPI is available for Spanish**
+    + I have translated PhoenixAPI to Spanish and now you can use the bot in English or Spanish. The repository now includes two folders.
+        1. The first one is named "EN" for English.
+        2. The second one is named "ES" for Spanish.
 
 * **Support**
 

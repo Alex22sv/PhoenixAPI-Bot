@@ -20,7 +20,7 @@ module.exports = {
                 {name:'Developed with', value:'`JavaScript & exaroton API`', inline:true},
                 {name:'Current version', value:'[v4.2.3](https://github.com/Alex0622/PhoenixAPI-Bot/releases/tag/v4.2.3)', inline:true},
                 {name:'Prefix', value:'`'+prefix+'`', inline:true},
-                {name:'Links', value:'[GitHub](https://github.com/Alex0622/PhoenixAPI-Bot) | [exaroton API documentation](https://support.exaroton.com/hc/en-us/articles/360019857878-API-documentation)', inline:false}
+                {name:'Links', value:'[GitHub](https://github.com/Alex0622/PhoenixAPI-Bot) | [exaroton API documentation](https://developers.exaroton.com/)', inline:false}
             )
             .setFooter(msg.author.tag, msg.author.avatarURL())
             await msg.channel.send({embeds:[infoEmbed]})
