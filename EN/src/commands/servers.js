@@ -19,7 +19,7 @@ module.exports = {
                     const noServerFound = new Discord.MessageEmbed()
                         .setTitle('Error!')
                         .setDescription(`The exaroton account **${account.name}** has no servers.`)
-                        .setColor(errorColor)
+                        .setColor(config.errorColor)
                         await msg.channel.send({embeds:[noServerFound]})
                     return
                 } else{
