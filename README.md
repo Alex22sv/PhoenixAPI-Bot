@@ -17,7 +17,7 @@ Follow the instructions to install your Discord bot:
 # Commands
 The default prefix is `API `.
 If you want to change the prefix, open the config.json file and edit the prefix.
-To get a full list of all available commands, use `API help` or click [here](https://alex22-sv.github.io/DiscordBots/PhoenixAPI/#commands). You can also show more information about a specific command using `API help {command}`.
+To get a full list of all available commands, use `API help` or click [here](https://www.alex22-sv.tk/bots/PhoenixAPI/#commands). You can also show more information about a specific command using `API help {command}`.
 
 # Important
 * **Status command**
