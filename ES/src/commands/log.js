@@ -13,6 +13,14 @@ module.exports = {
     execute(bot, msg, args){
         async function APIlog(){
             try{
+                if(args.length === 0){
+                    const notSeverMentioned = new Discord.MessageEmbed()
+                        .setTitle('Error!')
+                        .setDescription('Tu mensaje no incluye el parámetro **{servidor}**. \n*Usa ' + '`'+prefix+'help log`' + ' para más información.*')
+                        .setColor(config.errorColor)
+                    await msg.channel.send({embeds:[notSeverMentioned]})
+                    return
+                }
                 let name = args[0];
                 let serverLists = await exarotonClient.getServers();
                 let server = serverLists.find(server => server.name === name || server.id === name || server.address === name);
