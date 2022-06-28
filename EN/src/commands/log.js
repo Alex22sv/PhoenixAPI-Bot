@@ -13,6 +13,14 @@ module.exports = {
     execute(bot, msg, args){
         async function APIlog(){
             try{
+                if(!msg.member.permissions.has("ADMINISTRATOR")){
+                    const MissingPermissionsEmbed = new Discord.MessageEmbed()
+                        .setTitle('Error!')
+                        .setDescription('You need the permission `Administrator` to use that command.')
+                        .setColor(config.errorColor)
+                    await msg.channel.send({embeds:[MissingPermissionsEmbed]})
+                    return
+                }
                 if(args.length === 0){
                     const notSeverMentioned = new Discord.MessageEmbed()
                         .setTitle('Error!')
