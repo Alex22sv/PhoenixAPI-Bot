@@ -18,7 +18,7 @@ module.exports = {
                 {name:'Dueño', value:'`Alex22#7756`', inline:true},
                 {name:'Desarrollado desde', value: '`21/1/2021`', inline:true},
                 {name:'Desarrollado con', value:'`JavaScript & exaroton API`', inline:true},
-                {name:'Versión actual', value:'[v4.2.3](https://github.com/Alex22-SV/PhoenixAPI-Bot/releases/tag/v4.2.3)', inline:true},
+                {name:'Versión actual', value:'[v4.3.0](https://github.com/Alex22-SV/PhoenixAPI-Bot/releases/tag/v4.3.0)', inline:true},
                 {name:'Prefijo', value:'`'+prefix+'`', inline:true},
                 {name:'Enlaces', value:'[GitHub](https://github.com/Alex22-SV/PhoenixAPI-Bot) | [Documentación de la API de exaroton](https://developers.exaroton.com/) | [Tutorial de instalación](https://www.youtube.com/watch?v=lYosqjZpIBE)', inline:false}
             )
