@@ -40,7 +40,7 @@ module.exports = {
                 return
             } catch(e){
                 console.log(msg.content + ' | User: ' + msg.author.tag)
-                console.error(`Error while executing command "list": ${e.message}`)
+                console.error(`Error while executing command "log": ${e.message}`)
                 if(e.message == "Log file is empty or does not exist"){
                     const emptyLogEmbed = new Discord.MessageEmbed()
                         .setTitle('Error!')
