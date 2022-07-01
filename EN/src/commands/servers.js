@@ -24,7 +24,7 @@ module.exports = {
                     return
                 } else{
                         for(let server of servers){
-                            await msg.channel.send('Sever address: `' + server.address + '`| Server ID: `' + server.id + '`')}
+                            await msg.channel.send('Server address: `' + server.address + '`| Server ID: `' + server.id + '`')}
                 }
             } catch (e){
                 console.log(msg.content + ' | User: ' + msg.author.tag)
