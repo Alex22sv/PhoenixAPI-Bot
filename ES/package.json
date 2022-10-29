@@ -14,12 +14,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Alex22-SV/PhoenixAPI-Bot.git"
+    "url": "git+https://github.com/Alex22sv/PhoenixAPI-Bot.git"
   },
-  "author": "Alex22-SV",
+  "author": "Alex22sv",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Alex22-SV/PhoenixAPI-Bot/issues"
+    "url": "https://github.com/Alex22sv/PhoenixAPI-Bot/issues"
   },
-  "homepage": "https://github.com/Alex22-SV/PhoenixAPI-Bot#readme"
+  "homepage": "https://github.com/Alex22sv/PhoenixAPI-Bot#readme"
 }

@@ -18,9 +18,9 @@ module.exports = {
                 {name:'Owner', value:'`Alex22#7756`', inline:true},
                 {name:'Developed since', value: '`21/1/2021`', inline:true},
                 {name:'Developed with', value:'`JavaScript & exaroton API`', inline:true},
-                {name:'Current version', value:'[v4.3.0](https://github.com/Alex22-SV/PhoenixAPI-Bot/releases/tag/v4.3.0)', inline:true},
+                {name:'Current version', value:'[v4.3.0](https://github.com/Alex22sv/PhoenixAPI-Bot/releases/tag/v4.3.0)', inline:true},
                 {name:'Prefix', value:'`'+prefix+'`', inline:true},
-                {name:'Links', value:'[GitHub](https://github.com/Alex22-SV/PhoenixAPI-Bot) | [exaroton API documentation](https://developers.exaroton.com/)', inline:false}
+                {name:'Links', value:'[GitHub](https://github.com/Alex22sv/PhoenixAPI-Bot) | [exaroton API documentation](https://developers.exaroton.com/)', inline:false}
             )
             .setFooter(msg.author.tag, msg.author.avatarURL())
             await msg.channel.send({embeds:[infoEmbed]})

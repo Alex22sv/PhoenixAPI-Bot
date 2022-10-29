@@ -32,6 +32,6 @@ To get a full list of all available commands, use `API help` or click [here](htt
 * **Support**
 
     + I recommend joining my [Discord server](https://discord.com/invite/AAJPHqNXUy) if you have questions related to my Discord bot.
-    + If you found a bug please create an [issue](https://github.com/Alex22-SV/PhoenixAPI-Bot/issues) on GitHub.
+    + If you found a bug please create an [issue](https://github.com/Alex22sv/PhoenixAPI-Bot/issues) on GitHub.
 
 
